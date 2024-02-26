@@ -9,7 +9,7 @@ using System;
 
 namespace AutoPartsWeb.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(AutoPartsWebDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
