@@ -12,6 +12,7 @@
         public Product()
         {
             OrdersDetails = new List<OrderDetail>();
+            Ratings = new List<Rating>();
         }
 
         [Key]
@@ -42,7 +43,7 @@
         public bool IsDeleted { get; set; }
 
         [Comment("User identifier")]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
@@ -60,5 +61,8 @@
 
         [Comment("List of order details for the product")]
         public ICollection<OrderDetail> OrdersDetails { get; set; }
+
+        [Comment("List of ratings for the product")]
+        public ICollection<Rating> Ratings { get; set; }
     }
 }

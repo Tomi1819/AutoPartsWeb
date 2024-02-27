@@ -26,6 +26,11 @@
                 .WithMany(p => p.OrdersDetails)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Rating>()
+                .HasOne(r => r.Product)
+                .WithMany(p => p.Ratings)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(builder);
         }
 
@@ -34,5 +39,6 @@
         public DbSet<Manufacturer> Manufacturers { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Rating> Ratings { get; set; } = null!;
     }
 }

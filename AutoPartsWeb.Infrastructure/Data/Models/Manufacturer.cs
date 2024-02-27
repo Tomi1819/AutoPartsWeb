@@ -21,6 +21,14 @@
         [Comment("Manufacturer name")]
         public string Name { get; set; } = string.Empty;
 
+        [Required]
+        [MaxLength(ManufacturerMaxCountryLenght)]
+        [Comment("Manufacturer country")]
+        public string Country { get; set; } = string.Empty;
+
+        [Comment("Indicates whether the manufacturer is deleted")]
+        public bool IsDeleted { get; set; }
+
         [Comment("List of products manufactured by the manufacturer")]
         public ICollection<Product> Products { get; set; }
     }

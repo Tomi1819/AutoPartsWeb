@@ -31,6 +31,10 @@ namespace AutoPartsWeb.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Indicates whether the category is deleted");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -52,6 +56,16 @@ namespace AutoPartsWeb.Data.Migrations
                         .HasComment("Manufacturer identifier");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasComment("Manufacturer country");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasComment("Indicates whether the manufacturer is deleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -105,7 +119,7 @@ namespace AutoPartsWeb.Data.Migrations
                         .HasColumnType("int")
                         .HasComment("Product identifier");
 
-                    b.Property<int>("OrderDetailId")
+                    b.Property<int>("Id")
                         .HasColumnType("int")
                         .HasComment("Order detail identifier");
 
@@ -188,6 +202,39 @@ namespace AutoPartsWeb.Data.Migrations
                     b.ToTable("Products");
 
                     b.HasComment("Products table");
+                });
+
+            modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasComment("Rating identifier");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int")
+                        .HasComment("Product identifier");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasComment("User identifier");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int")
+                        .HasComment("Ratings value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
+
+                    b.HasComment("Ratings table");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -438,6 +485,25 @@ namespace AutoPartsWeb.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Rating", b =>
+                {
+                    b.HasOne("AutoPartsWeb.Infrastructure.Data.Models.Product", "Product")
+                        .WithMany("Ratings")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -507,6 +573,8 @@ namespace AutoPartsWeb.Data.Migrations
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Product", b =>
                 {
                     b.Navigation("OrdersDetails");
+
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }

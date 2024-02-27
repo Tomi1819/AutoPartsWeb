@@ -15,7 +15,8 @@ namespace AutoPartsWeb.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Category identifier")
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Category name")
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "Category name"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Indicates whether the category is deleted")
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,9 @@ namespace AutoPartsWeb.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Manufacturer identifier")
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Manufacturer name")
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, comment: "Manufacturer name"),
+                    Country = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, comment: "Manufacturer country"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, comment: "Indicates whether the manufacturer is deleted")
                 },
                 constraints: table =>
                 {
@@ -99,7 +102,7 @@ namespace AutoPartsWeb.Data.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false, comment: "Order identifier"),
                     ProductId = table.Column<int>(type: "int", nullable: false, comment: "Product identifier"),
-                    OrderDetailId = table.Column<int>(type: "int", nullable: false, comment: "Order detail identifier"),
+                    Id = table.Column<int>(type: "int", nullable: false, comment: "Order detail identifier"),
                     Quantity = table.Column<int>(type: "int", nullable: false, comment: "Quantity of the product in the order"),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "Unit price of the product in the order")
                 },
@@ -121,6 +124,34 @@ namespace AutoPartsWeb.Data.Migrations
                 },
                 comment: "OrdersDetails table");
 
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, comment: "Rating identifier")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<int>(type: "int", nullable: false, comment: "Ratings value"),
+                    ProductId = table.Column<int>(type: "int", nullable: false, comment: "Product identifier"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false, comment: "User identifier")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                },
+                comment: "Ratings table");
+
             migrationBuilder.CreateIndex(
                 name: "IX_OrdersDetails_ProductId",
                 table: "OrdersDetails",
@@ -140,12 +171,25 @@ namespace AutoPartsWeb.Data.Migrations
                 name: "IX_Products_UserId",
                 table: "Products",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_ProductId",
+                table: "Ratings",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_UserId",
+                table: "Ratings",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "OrdersDetails");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "Orders");

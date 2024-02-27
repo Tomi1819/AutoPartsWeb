@@ -21,6 +21,9 @@
         [Comment("Category name")]
         public string Name { get; set; } = string.Empty;
 
+        [Comment("Indicates whether the category is deleted")]
+        public bool IsDeleted { get; set; }
+
         [Comment("List of products in this category")]
         public ICollection<Product> Products { get; set; }
     }

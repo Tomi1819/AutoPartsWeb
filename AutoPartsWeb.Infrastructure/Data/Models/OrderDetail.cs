@@ -8,7 +8,7 @@
     public class OrderDetail
     {
         [Comment("Order detail identifier")]
-        public int OrderDetailId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Comment("Order identifier")]
