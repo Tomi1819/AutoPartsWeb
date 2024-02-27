@@ -43,7 +43,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasComment("Categories table");
                 });
@@ -75,7 +75,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers");
+                    b.ToTable("Manufacturers", (string)null);
 
                     b.HasComment("Manufacturers table");
                 });
@@ -104,7 +104,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
 
                     b.HasComment("Orders table");
                 });
@@ -135,7 +135,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrdersDetails");
+                    b.ToTable("OrdersDetails", (string)null);
 
                     b.HasComment("OrdersDetails table");
                 });
@@ -199,7 +199,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasComment("Products table");
                 });
@@ -232,7 +232,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Ratings", (string)null);
 
                     b.HasComment("Ratings table");
                 });

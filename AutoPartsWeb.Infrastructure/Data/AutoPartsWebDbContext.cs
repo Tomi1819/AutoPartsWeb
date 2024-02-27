@@ -1,5 +1,6 @@
 ﻿namespace AutoPartsWeb.Data
 {
+    using AutoPartsWeb.Infrastructure.Data.DataSeed;
     using AutoPartsWeb.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,11 @@
                 .HasOne(r => r.Product)
                 .WithMany(p => p.Ratings)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new ManufacturerConfiguration());
+            //builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }
