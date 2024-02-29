@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AutoPartsWeb.Data.Migrations
 {
-    public partial class DataModelsCreated : Migration
+    public partial class DataModelsCretated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,12 +47,18 @@ namespace AutoPartsWeb.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Order identifier")
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Order date"),
-                    CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: false, comment: "Customer identifier"),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "Total order amount")
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false, comment: "Status of order"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false, comment: "User identificator")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 },
                 comment: "Orders table");
 
@@ -104,7 +110,7 @@ namespace AutoPartsWeb.Data.Migrations
                     ProductId = table.Column<int>(type: "int", nullable: false, comment: "Product identifier"),
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Order detail identifier"),
                     Quantity = table.Column<int>(type: "int", nullable: false, comment: "Quantity of the product in the order"),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "Unit price of the product in the order")
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false, comment: "Unit price of the product in the order")
                 },
                 constraints: table =>
                 {
@@ -151,6 +157,11 @@ namespace AutoPartsWeb.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 },
                 comment: "Ratings table");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrdersDetails_ProductId",

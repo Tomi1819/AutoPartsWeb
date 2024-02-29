@@ -31,6 +31,6 @@
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         [Comment("Unit price of the product in the order")]
-        public decimal UnitPrice { get; set; }
+        public decimal Price { get; set; }
     }
 }

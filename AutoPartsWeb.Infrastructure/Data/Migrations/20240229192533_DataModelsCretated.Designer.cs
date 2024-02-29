@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoPartsWeb.Data.Migrations
 {
     [DbContext(typeof(AutoPartsWebDbContext))]
-    [Migration("20240227141433_DataModelsCreated")]
-    partial class DataModelsCreated
+    [Migration("20240229192533_DataModelsCretated")]
+    partial class DataModelsCretated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,20 +91,23 @@ namespace AutoPartsWeb.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Customer identifier");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2")
                         .HasComment("Order date");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Total order amount");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Status of order");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasComment("User identificator");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
 
@@ -125,13 +128,13 @@ namespace AutoPartsWeb.Data.Migrations
                         .HasColumnType("int")
                         .HasComment("Order detail identifier");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("Unit price of the product in the order");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
                         .HasComment("Quantity of the product in the order");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Unit price of the product in the order");
 
                     b.HasKey("OrderId", "ProductId");
 
@@ -439,6 +442,17 @@ namespace AutoPartsWeb.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Order", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.OrderDetail", b =>

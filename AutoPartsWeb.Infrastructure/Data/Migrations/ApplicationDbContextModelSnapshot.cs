@@ -43,7 +43,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasComment("Categories table");
                 });
@@ -75,7 +75,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers", (string)null);
+                    b.ToTable("Manufacturers");
 
                     b.HasComment("Manufacturers table");
                 });
@@ -89,22 +89,25 @@ namespace AutoPartsWeb.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Customer identifier");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2")
                         .HasComment("Order date");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Total order amount");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Status of order");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasComment("User identificator");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
 
                     b.HasComment("Orders table");
                 });
@@ -123,19 +126,19 @@ namespace AutoPartsWeb.Data.Migrations
                         .HasColumnType("int")
                         .HasComment("Order detail identifier");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("Unit price of the product in the order");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
                         .HasComment("Quantity of the product in the order");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Unit price of the product in the order");
 
                     b.HasKey("OrderId", "ProductId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrdersDetails", (string)null);
+                    b.ToTable("OrdersDetails");
 
                     b.HasComment("OrdersDetails table");
                 });
@@ -199,7 +202,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasComment("Products table");
                 });
@@ -232,7 +235,7 @@ namespace AutoPartsWeb.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Ratings", (string)null);
+                    b.ToTable("Ratings");
 
                     b.HasComment("Ratings table");
                 });
@@ -437,6 +440,17 @@ namespace AutoPartsWeb.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Order", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.OrderDetail", b =>

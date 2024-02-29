@@ -57,6 +57,7 @@
         [Comment("Category identifier")]
         public int CategoryId { get; set; }
 
+        [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
 
         [Comment("List of order details for the product")]

@@ -32,10 +32,10 @@
                 .WithMany(p => p.Ratings)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.ApplyConfiguration(new CategoryConfiguration());
-            builder.ApplyConfiguration(new ManufacturerConfiguration());
+            //builder.ApplyConfiguration(new CategoryConfiguration());
+            //builder.ApplyConfiguration(new ManufacturerConfiguration());
             //builder.ApplyConfiguration(new ProductConfiguration());
-            builder.ApplyConfiguration(new UserConfiguration());
+            //builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }

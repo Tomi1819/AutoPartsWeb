@@ -1,5 +1,6 @@
 ﻿namespace AutoPartsWeb.Infrastructure.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -19,14 +20,14 @@
         [Comment("Order date")]
         public DateTime OrderDate { get; set; }
 
-        [Required]
-        [Comment("Customer identifier")]
-        public string CustomerId { get; set; } = string.Empty;
+        [Comment("Status of order")]
+        public string Status { get; set; } = string.Empty;
 
-        [Required]
-        [Comment("Total order amount")]
-        [Column(TypeName ="decimal(18,2)")]
-        public decimal TotalAmount { get; set; }
+        [Comment("User identificator")]
+        public string UserId { get; set; } = string.Empty;
+
+        [ForeignKey(nameof(UserId))]
+        public IdentityUser User { get; set; } = null!;
 
         [Comment("List of order details for the order")]
         public ICollection<OrderDetail> OrdersDetails { get; set; }
