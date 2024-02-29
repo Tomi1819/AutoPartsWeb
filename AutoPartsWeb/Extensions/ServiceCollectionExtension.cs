@@ -1,6 +1,7 @@
 ﻿using AutoPartsWeb.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using AutoPartsWeb.Infrastructure.Data.DataSeed;
 
 namespace AutoPartsWeb.Extensions
 {
@@ -8,6 +9,7 @@ namespace AutoPartsWeb.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            //services.AddSingleton<DataSeeder>();
             return services;
         }
 

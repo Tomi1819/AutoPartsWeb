@@ -3,29 +3,34 @@
     using AutoPartsWeb.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Identity;
 
-    internal class DataSeeder
+    public class DataSeeder
     {
-        public IdentityUser AdminUser { get; set; } 
-        public IdentityUser GuestUser { get; set; } 
+        public IdentityUser AdminUser { get; set; } = null!;
+        public IdentityUser GuestUser { get; set; } = null!;
 
-        public Category EngineCategory { get; set; } 
-        public Category BrakesCategory { get; set; } 
-        public Category SuspensionCategory { get; set; }
+        public Category EngineCategory { get; set; } = null!;
+        public Category BrakesCategory { get; set; } = null!;
+        public Category SuspensionCategory { get; set; } = null!;
 
-        public Manufacturer Bosh { get; set; } 
-        public Manufacturer Bilstein { get; set; } 
-        public Manufacturer Brembo { get; set; } 
+        public Manufacturer Bosh { get; set; } = null!;
+        public Manufacturer Bilstein { get; set; } = null!;
+        public Manufacturer Brembo { get; set; } = null!;
 
-        public Product Battery { get; set; } 
-        public Product BilsteinEvoT2 { get; set; }
-        public Product BrakePads { get; set; }
+        public Product Battery { get; set; } = null!;
+        public Product BilsteinEvoT2 { get; set; } = null!;
+        public Product BrakePads { get; set; } = null!;
+
+        public Rating First { get; set; } = null!;
+        public Rating Second { get; set; } = null!;
+        public Rating Third { get; set; } = null!;
 
         public DataSeeder()
         {
+            SeedUsers();
             SeedCategories();
             SeedManufacturers();
-            //SeedProducts();
-            SeedUsers();
+            SeedProducts();
+            SeedRatings();
         }
 
         private void SeedUsers()
@@ -99,49 +104,76 @@
             };
         }
 
-        //private void SeedProducts()
-        //{
-        //    Battery = new Product()
-        //    {
-        //        Id = 1,
-        //        Name = "Battery",
-        //        Description = "An automotive battery, or car battery, is a rechargeable battery that is used to start a motor vehicle.",
-        //        Price = 120.00m,
-        //        StockQuantity = 15,
-        //        ImageUrl = "https://cdn.media.halfords.com/i/washford/950295/Halfords-HB063-Lead-Acid-12V-Car-Battery-3-Year-Guarantee?fmt=auto&qlt=default&$sfcc_tile$&w=680",
-        //        IsDeleted = false,
-        //        UserId = GuestUser.Id.ToString(),
-        //        ManufacturerId = Bosh.Id,
-        //        CategoryId = EngineCategory.Id
-        //    };
+        private void SeedProducts()
+        {
+            Battery = new Product()
+            {
+                Id = 1,
+                Name = "Battery",
+                Description = "An automotive battery, or car battery, is a rechargeable battery that is used to start a motor vehicle.",
+                Price = 120.00m,
+                StockQuantity = 15,
+                ImageUrl = "https://cdn.media.halfords.com/i/washford/950295/Halfords-HB063-Lead-Acid-12V-Car-Battery-3-Year-Guarantee?fmt=auto&qlt=default&$sfcc_tile$&w=680",
+                IsDeleted = false,
+                UserId = GuestUser.Id,
+                ManufacturerId = Bosh.Id,
+                CategoryId = EngineCategory.Id
+            };
 
-        //    BilsteinEvoT2 = new Product()
-        //    {
-        //        Id = 2,
-        //        Name = "BilsteinEvoT2",
-        //        Description = "BILSTEIN EVO T2 track performance suspension.",
-        //        Price = 250.00m,
-        //        StockQuantity = 5,
-        //        ImageUrl = "https://performance.bilstein.com/wp-content/uploads/2023/10/BILSTEIN-EVO-T2.png",
-        //        IsDeleted = false,
-        //        //UserId = GuestUser.Id,
-        //        ManufacturerId = Bilstein.Id,
-        //        CategoryId = SuspensionCategory.Id
-        //    };
+            BilsteinEvoT2 = new Product()
+            {
+                Id = 2,
+                Name = "BilsteinEvoT2",
+                Description = "BILSTEIN EVO T2 track performance suspension.",
+                Price = 250.00m,
+                StockQuantity = 5,
+                ImageUrl = "https://performance.bilstein.com/wp-content/uploads/2023/10/BILSTEIN-EVO-T2.png",
+                IsDeleted = false,
+                UserId = GuestUser.Id,
+                ManufacturerId = Bilstein.Id,
+                CategoryId = SuspensionCategory.Id
+            };
 
-        //    BrakePads = new Product()
-        //    {
-        //        Id = 3,
-        //        Name = "Brake pads",
-        //        Description = "Brake pads convert the kinetic energy of a vehicle to thermal energy through friction. Two brake pads are contained in the brake with their friction surfaces facing the rotor.",
-        //        Price = 55.00m,
-        //        StockQuantity = 30,
-        //        ImageUrl = "https://www.buybrakes.com/images/product/brembo-oe-replacement-brake-pads.jpg",
-        //        IsDeleted = false,
-        //        //UserId = GuestUser.Id,
-        //        ManufacturerId = Brembo.Id,
-        //        CategoryId = BrakesCategory.Id
-        //    };
-        //}
+            BrakePads = new Product()
+            {
+                Id = 3,
+                Name = "Brake pads",
+                Description = "Brake pads convert the kinetic energy of a vehicle to thermal energy through friction. Two brake pads are contained in the brake with their friction surfaces facing the rotor.",
+                Price = 55.00m,
+                StockQuantity = 30,
+                ImageUrl = "https://www.buybrakes.com/images/product/brembo-oe-replacement-brake-pads.jpg",
+                IsDeleted = false,
+                UserId = GuestUser.Id,
+                ManufacturerId = Brembo.Id,
+                CategoryId = BrakesCategory.Id
+            };
+        }
+
+        private void SeedRatings()
+        {
+            First = new Rating()
+            {
+                Id = 1,
+                Value = 4,
+                ProductId = 3,
+                UserId = GuestUser.Id,
+            };
+
+            Second = new Rating()
+            {
+                Id = 2,
+                Value = 5,
+                ProductId = 1,
+                UserId = GuestUser.Id,
+            };
+
+            Third = new Rating()
+            {
+                Id = 3,
+                Value = 5,
+                ProductId = 2,
+                UserId = GuestUser.Id,
+            };
+        }
     }
 }

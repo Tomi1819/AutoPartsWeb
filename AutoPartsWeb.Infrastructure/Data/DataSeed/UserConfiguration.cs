@@ -6,14 +6,18 @@
 
     internal class UserConfiguration : IEntityTypeConfiguration<IdentityUser>
     {
+        private readonly DataSeeder dataSeeder;
+
+        public UserConfiguration(DataSeeder dataSeeder)
+        {
+            this.dataSeeder = dataSeeder;
+        }
         public void Configure(EntityTypeBuilder<IdentityUser> builder)
         {
-            var data = new DataSeeder();
-
             builder.HasData(new IdentityUser[]
             {
-                data.AdminUser,
-                data.GuestUser
+                dataSeeder.AdminUser,
+                dataSeeder.GuestUser
             });
         }
     }

@@ -6,15 +6,19 @@
 
     internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
+        private readonly DataSeeder dataSeeder;
+
+        public CategoryConfiguration(DataSeeder dataSeeder)
+        {
+            this.dataSeeder = dataSeeder;
+        }
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            var data = new DataSeeder();
-
             builder.HasData(new Category[]
             {
-                data.EngineCategory,
-                data.SuspensionCategory,
-                data.BrakesCategory
+                dataSeeder.EngineCategory,
+                dataSeeder.SuspensionCategory,
+                dataSeeder.BrakesCategory
             });
         }
     }

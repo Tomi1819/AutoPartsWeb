@@ -6,15 +6,19 @@
 
     internal class ManufacturerConfiguration : IEntityTypeConfiguration<Manufacturer>
     {
+        private readonly DataSeeder dataSeeder;
+
+        public ManufacturerConfiguration(DataSeeder dataSeeder)
+        {
+            this.dataSeeder = dataSeeder;
+        }
         public void Configure(EntityTypeBuilder<Manufacturer> builder)
         {
-            var data = new DataSeeder();
-
             builder.HasData(new Manufacturer[]
             {
-                data.Brembo,
-                data.Bilstein,
-                data.Bosh
+                dataSeeder.Brembo,
+                dataSeeder.Bilstein,
+                dataSeeder.Bosh
             });
         }
     }

@@ -4,18 +4,22 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    //internal class ProductConfiguration : IEntityTypeConfiguration<Product>
-    //{
-    //    public void Configure(EntityTypeBuilder<Product> builder)
-    //    {
-    //        var data = new DataSeeder();
+    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
+    {
+        private readonly DataSeeder dataSeeder;
 
-    //        builder.HasData(new Product[]
-    //        {
-    //            data.Battery,
-    //            data.BilsteinEvoT2,
-    //            data.BrakePads
-    //        });
-    //    }
-    //}
+        public ProductConfiguration(DataSeeder dataSeeder)
+        {
+            this.dataSeeder = dataSeeder;
+        }
+        public void Configure(EntityTypeBuilder<Product> builder)
+        {
+            builder.HasData(new Product[]
+            {
+                dataSeeder.Battery,
+                dataSeeder.BilsteinEvoT2,
+                dataSeeder.BrakePads
+            });
+        }
+    }
 }
