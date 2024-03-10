@@ -1,11 +1,12 @@
 ﻿using AutoPartsWeb.Core.Contracts;
 using AutoPartsWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace AutoPartsWeb.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> logger;
         private readonly IProductService productService;
@@ -17,6 +18,7 @@ namespace AutoPartsWeb.Controllers
             this.productService = productService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var model = await productService.GetAllProductsAsync();
