@@ -1,15 +1,15 @@
-﻿using AutoPartsWeb.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using AutoPartsWeb.Infrastructure.Data.DataSeed;
-
-namespace AutoPartsWeb.Extensions
+﻿namespace AutoPartsWeb.Extensions
 {
+    using AutoPartsWeb.Data;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using AutoPartsWeb.Infrastructure.Data.DataSeed;
+    using AutoPartsWeb.Infrastructure.Data.Common;
+
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            //services.AddSingleton<DataSeeder>();
             return services;
         }
 
@@ -21,6 +21,10 @@ namespace AutoPartsWeb.Extensions
                 options.UseSqlServer(connectionString));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddScoped<DataSeeder>();
+
+            services.AddScoped<IRepository, Repository>();
 
             return services;
         }
