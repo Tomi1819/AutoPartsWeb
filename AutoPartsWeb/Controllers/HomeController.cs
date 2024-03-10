@@ -1,4 +1,5 @@
-﻿using AutoPartsWeb.Models;
+﻿using AutoPartsWeb.Core.Contracts;
+using AutoPartsWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,21 +7,21 @@ namespace AutoPartsWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILogger<HomeController> logger;
+        private readonly IProductService productService;
+        public HomeController(
+            ILogger<HomeController> logger,
+            IProductService productService)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.productService = productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var model = await productService.GetAllProductsAsync();
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
