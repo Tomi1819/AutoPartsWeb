@@ -5,11 +5,14 @@
     using Microsoft.EntityFrameworkCore;
     using AutoPartsWeb.Infrastructure.Data.DataSeed;
     using AutoPartsWeb.Infrastructure.Data.Common;
+    using AutoPartsWeb.Core.Contracts;
+    using AutoPartsWeb.Core.Services;
 
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IProductService, ProductService>();
             return services;
         }
 
