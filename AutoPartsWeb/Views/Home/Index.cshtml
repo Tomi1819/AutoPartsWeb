@@ -1,25 +1,21 @@
-﻿@model IEnumerable<ProductIndexServiceModel>
+﻿@{
+    ViewData["Title"] = "Welcome to Auto Parts Web Store";
+}
 
-<h2>Products</h2>
+<div class="jumbotron bg-light text-dark">
+    <h1>Welcome to Auto Parts Web Store</h1>
+    <p class="lead">Explore our wide range of auto parts for your vehicle.</p>
+</div>
 
 <div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="@product.ImageUrl" alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title">@product.Name</h5>
-                    <p class="card-text">@product.Description</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-outline-secondary">View</a>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
-                        </div>
-                        <small class="text-muted">$@product.Price</small>
-                    </div>
-                </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">About Us</h2>
+                <p class="card-text">Auto Parts Web Store is your destination for high quality auto parts at affordable prices. With our large range of products and fast delivery, we are here to provide the best service to our customers.</p>
             </div>
         </div>
-    }
+    </div>
 </div>
+
+<p class="text-center">Explore our products and find the perfect parts for your vehicle!</p>

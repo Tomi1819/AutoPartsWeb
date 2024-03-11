@@ -19,12 +19,19 @@ namespace AutoPartsWeb.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
         {
             var model = await productService.GetAllProductsAsync();
 
             return View(model);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
