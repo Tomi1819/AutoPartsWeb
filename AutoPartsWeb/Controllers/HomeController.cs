@@ -32,6 +32,14 @@ namespace AutoPartsWeb.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(string keywords)
+        {
+            var model = await productService.SearchProductsAsync(keywords);
+
+            return View(model);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

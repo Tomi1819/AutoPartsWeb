@@ -31,6 +31,36 @@
                 })
                 .ToListAsync();
         }
+        public async Task<IEnumerable<ProductIndexServiceModel>> SearchProductsAsync(string keywords)
+        {
+            if (string.IsNullOrWhiteSpace(keywords))
+            {
+                return Enumerable.Empty<ProductIndexServiceModel>();
+            }
+
+            keywords = keywords.ToLower();
+
+            var products = await repository
+                .AllReadOnly<Product>()
+                .Include(p => p.Manufacturer)
+                .Include(p => p.Category)
+                .Where(p => p.Name.ToLower().Contains(keywords) || p.Description.ToLower().Contains(keywords))
+                .ToListAsync();
+
+            var productModels = products
+                .Select(p => new ProductIndexServiceModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    ManufacturerName = p.Manufacturer.Name,
+                    CategoryName = p.Category.Name
+                });
+
+            return productModels;
+        }
         public Task<IEnumerable<ProductIndexServiceModel>> FilterProductsAsync(string category, string manufacturer, decimal minPrice, decimal maxPrice)
         {
             throw new NotImplementedException();
@@ -42,9 +72,5 @@
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductIndexServiceModel>> SearchProductsAsync(string keywords)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
