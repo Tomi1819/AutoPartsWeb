@@ -59,16 +59,5 @@
 
             return productModels;
         }
-        public Task<IEnumerable<ProductIndexViewModel>> FilterProductsAsync(string category, string manufacturer, decimal minPrice, decimal maxPrice)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public Task<IEnumerable<ProductIndexViewModel>> GetSpecialOffersAsync()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
