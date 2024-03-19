@@ -15,27 +15,25 @@
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductIndexViewModel>> GetAllProductsAsync()
         {
             return await repository
                 .AllReadOnly<Product>()
-                .Select(p => new ProductIndexServiceModel()
+                .Select(p => new ProductIndexViewModel()
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     Price = p.Price,
                     ImageUrl = p.ImageUrl,
-                    ManufacturerName = p.Manufacturer.Name,
-                    CategoryName = p.Category.Name
                 })
                 .ToListAsync();
         }
-        public async Task<IEnumerable<ProductIndexServiceModel>> SearchProductsAsync(string keywords)
+        public async Task<IEnumerable<ProductSearchViewModel>> SearchProductsAsync(string keywords)
         {
             if (string.IsNullOrWhiteSpace(keywords))
             {
-                return Enumerable.Empty<ProductIndexServiceModel>();
+                return Enumerable.Empty<ProductSearchViewModel>();
             }
 
             keywords = keywords.ToLower();
@@ -48,7 +46,7 @@
                 .ToListAsync();
 
             var productModels = products
-                .Select(p => new ProductIndexServiceModel()
+                .Select(p => new ProductSearchViewModel()
                 {
                     Id = p.Id,
                     Name = p.Name,
@@ -61,13 +59,13 @@
 
             return productModels;
         }
-        public Task<IEnumerable<ProductIndexServiceModel>> FilterProductsAsync(string category, string manufacturer, decimal minPrice, decimal maxPrice)
+        public Task<IEnumerable<ProductIndexViewModel>> FilterProductsAsync(string category, string manufacturer, decimal minPrice, decimal maxPrice)
         {
             throw new NotImplementedException();
         }
 
 
-        public Task<IEnumerable<ProductIndexServiceModel>> GetSpecialOffersAsync()
+        public Task<IEnumerable<ProductIndexViewModel>> GetSpecialOffersAsync()
         {
             throw new NotImplementedException();
         }

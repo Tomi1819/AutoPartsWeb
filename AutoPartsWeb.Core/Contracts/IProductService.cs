@@ -4,9 +4,9 @@
 
     public interface IProductService
     {
-        Task<IEnumerable<ProductIndexServiceModel>> GetAllProductsAsync();
-        Task<IEnumerable<ProductIndexServiceModel>> SearchProductsAsync(string keywords);
-        Task<IEnumerable<ProductIndexServiceModel>> FilterProductsAsync(string category, string manufacturer, decimal minPrice, decimal maxPrice);
-        Task<IEnumerable<ProductIndexServiceModel>> GetSpecialOffersAsync();
+        Task<IEnumerable<ProductIndexViewModel>> GetAllProductsAsync();
+        Task<IEnumerable<ProductSearchViewModel>> SearchProductsAsync(string keywords);
+        Task<IEnumerable<ProductIndexViewModel>> FilterProductsAsync(string category, string manufacturer, decimal minPrice, decimal maxPrice);
+        Task<IEnumerable<ProductIndexViewModel>> GetSpecialOffersAsync();
     }
 }

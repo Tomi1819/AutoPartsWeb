@@ -1,6 +1,6 @@
 ﻿namespace AutoPartsWeb.Core.Models.Home
 {
-    public class ProductIndexServiceModel
+    public class ProductSearchViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
