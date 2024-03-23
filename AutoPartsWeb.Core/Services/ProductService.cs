@@ -20,6 +20,7 @@
         {
             return await repository
                 .AllReadOnly<Product>()
+                .Where(p => p.IsDeleted == false)
                 .Select(p => new ProductIndexViewModel()
                 {
                     Id = p.Id,
@@ -35,7 +36,7 @@
         {
             var product = await repository
                 .AllReadOnly<Product>()
-                .Where(p => p.Id == id)
+                .Where(p => p.Id == id && p.IsDeleted == false)
                 .Select(p => new ProductDetailsViewModel()
                 {
                     Id = p.Id,
@@ -66,7 +67,9 @@
                 .AllReadOnly<Product>()
                 .Include(p => p.Manufacturer)
                 .Include(p => p.Category)
-                .Where(p => p.Name.ToLower().Contains(keywords) || p.Description.ToLower().Contains(keywords))
+                .Where(p => p.Name.ToLower().Contains(keywords) || 
+                p.Description.ToLower().Contains(keywords) &&
+                p.IsDeleted == false)
                 .ToListAsync();
 
             var productModels = products
