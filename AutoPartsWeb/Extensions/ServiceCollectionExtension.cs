@@ -13,6 +13,7 @@
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IDealerService, DealerService>();
             return services;
         }
 
