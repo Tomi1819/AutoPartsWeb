@@ -60,6 +60,12 @@
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
 
+        [Comment("Dealer identifier")]
+        public int DealerId { get; set; }
+
+        [ForeignKey(nameof(DealerId))]
+        public Dealer Dealer { get; set; }
+
         [Comment("List of order details for the product")]
         public ICollection<OrderDetail> OrdersDetails { get; set; }
 

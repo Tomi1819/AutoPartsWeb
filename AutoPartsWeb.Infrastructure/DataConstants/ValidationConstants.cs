@@ -1,6 +1,6 @@
 ﻿namespace AutoPartsWeb.Infrastructure.DataConstants
 {
-    internal class ValidationConstants
+    public class ValidationConstants
     {
         //Category
         public const int CategoryMinNameLenght = 4;
@@ -21,5 +21,21 @@
         //Rating
         public const int MinRatingValue = 1;
         public const int MaxRatingValue = 5;
+
+        //Dealer
+        public const int DealerMinNameLenght = 3;
+        public const int DealerMaxNameLenght = 50;
+
+        public const int DealerCompanyNameMinLenght = 5;
+        public const int DealerCompanyNameMaxLenght = 100;
+
+        public const int DealerCompanyNumberMinLenght = 10;
+        public const int DealerCompanyNumberMaxLenght = 25;
+
+        public const int DealerDescriptionMinLenght = 15;
+        public const int DealerDescriptionMaxLenght = 500;
+
+        //DateTime
+        public const string DateTimeFormat = "dd/MM/yyyy HH:mm";
     }
 }

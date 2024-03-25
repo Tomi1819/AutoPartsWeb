@@ -23,11 +23,11 @@
         [Comment("Status of order")]
         public string Status { get; set; } = string.Empty;
 
-        [Comment("User identificator")]
-        public string UserId { get; set; } = string.Empty;
+        [Comment("Dealer identifier")]
+        public int DealerId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        [ForeignKey(nameof(DealerId))]
+        public Dealer Dealer { get; set; }
 
         [Comment("List of order details for the order")]
         public ICollection<OrderDetail> OrdersDetails { get; set; }

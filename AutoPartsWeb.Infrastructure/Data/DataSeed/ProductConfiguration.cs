@@ -14,6 +14,12 @@
         }
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder
+                .HasOne(p => p.Dealer)
+                .WithMany(d => d.Products)
+                .HasForeignKey(p => p.DealerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasData(new Product[]
             {
                 dataSeeder.Battery,

@@ -1,12 +1,15 @@
 ﻿namespace AutoPartsWeb.Infrastructure.Data.DataSeed
 {
     using AutoPartsWeb.Infrastructure.Data.Models;
+    using AutoPartsWeb.Infrastructure.DataConstants;
     using Microsoft.AspNetCore.Identity;
 
     public class DataSeeder
     {
         public IdentityUser AdminUser { get; set; } = null!;
         public IdentityUser GuestUser { get; set; } = null!;
+
+        public Dealer Dealer { get; set; } = null!;
 
         public Category EngineCategory { get; set; } = null!;
         public Category BrakesCategory { get; set; } = null!;
@@ -24,13 +27,17 @@
         public Rating Second { get; set; } = null!;
         public Rating Third { get; set; } = null!;
 
+        public Order Order { get; set; } = null!;
+
         public DataSeeder()
         {
             SeedUsers();
+            SeedDealers();
             SeedCategories();
             SeedManufacturers();
             SeedProducts();
             SeedRatings();
+            SeedOrders();
         }
 
         private void SeedUsers()
@@ -53,6 +60,20 @@
                 NormalizedEmail = "guest@mail.com"
             };
         }
+        private void SeedDealers()
+        {
+            Dealer = new Dealer()
+            {
+                Id = 1,
+                Name = "Dimitrichko",
+                CompanyName = "AutoTrader",
+                CompanyNumber = "7516425943",
+                Description = "The biggest auto parts dealer in Bulgaria.",
+                IsDeleted = false,
+                UserId = AdminUser.Id
+            };
+        }
+
         private void SeedCategories()
         {
             EngineCategory = new Category()
@@ -77,6 +98,16 @@
             };
         }
 
+        private void SeedOrders()
+        {
+            Order = new Order()
+            {
+                Id = 1,
+                OrderDate = new DateTime(2024, 3, 21),
+                Status = "In progress",
+                DealerId = Dealer.Id,
+            };
+        }
         private void SeedManufacturers()
         {
             Bosh = new Manufacturer()
@@ -117,7 +148,8 @@
                 IsDeleted = false,
                 UserId = GuestUser.Id,
                 ManufacturerId = Bosh.Id,
-                CategoryId = EngineCategory.Id
+                CategoryId = EngineCategory.Id,
+                DealerId = Dealer.Id,
             };
 
             BilsteinEvoT2 = new Product()
@@ -131,7 +163,8 @@
                 IsDeleted = false,
                 UserId = GuestUser.Id,
                 ManufacturerId = Bilstein.Id,
-                CategoryId = SuspensionCategory.Id
+                CategoryId = SuspensionCategory.Id,
+                DealerId = Dealer.Id
             };
 
             BrakePads = new Product()
@@ -145,7 +178,8 @@
                 IsDeleted = false,
                 UserId = GuestUser.Id,
                 ManufacturerId = Brembo.Id,
-                CategoryId = BrakesCategory.Id
+                CategoryId = BrakesCategory.Id,
+                DealerId = Dealer.Id
             };
         }
 

@@ -4,6 +4,7 @@ using AutoPartsWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoPartsWeb.Data.Migrations
 {
     [DbContext(typeof(AutoPartsWebDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240324101813_NewDatabase")]
+    partial class NewDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,26 +48,6 @@ namespace AutoPartsWeb.Data.Migrations
                     b.ToTable("Categories");
 
                     b.HasComment("Categories table");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "Engine"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            Name = "Suspension"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "Brakes"
-                        });
                 });
 
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Dealer", b =>
@@ -116,18 +98,6 @@ namespace AutoPartsWeb.Data.Migrations
                     b.ToTable("Dealers");
 
                     b.HasComment("Dealers table");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CompanyName = "AutoTrader",
-                            CompanyNumber = "7516425943",
-                            Description = "The biggest auto parts dealer in Bulgaria.",
-                            IsDeleted = false,
-                            Name = "Dimitrichko",
-                            UserId = "dea12856-c198-4129-b3f3-b893d8395082"
-                        });
                 });
 
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Manufacturer", b =>
@@ -160,29 +130,6 @@ namespace AutoPartsWeb.Data.Migrations
                     b.ToTable("Manufacturers");
 
                     b.HasComment("Manufacturers table");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            Country = "Italy",
-                            IsDeleted = false,
-                            Name = "Brembo"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Country = "Germany",
-                            IsDeleted = false,
-                            Name = "Bilstein"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            Country = "Germany",
-                            IsDeleted = false,
-                            Name = "Bosh"
-                        });
                 });
 
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Order", b =>
@@ -214,15 +161,6 @@ namespace AutoPartsWeb.Data.Migrations
                     b.ToTable("Orders");
 
                     b.HasComment("Orders table");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DealerId = 1,
-                            OrderDate = new DateTime(2024, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "In progress"
-                        });
                 });
 
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.OrderDetail", b =>
@@ -324,50 +262,6 @@ namespace AutoPartsWeb.Data.Migrations
                     b.ToTable("Products");
 
                     b.HasComment("Products table");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            DealerId = 1,
-                            Description = "An automotive battery, or car battery, is a rechargeable battery that is used to start a motor vehicle.",
-                            ImageUrl = "https://cdn.media.halfords.com/i/washford/950295/Halfords-HB063-Lead-Acid-12V-Car-Battery-3-Year-Guarantee?fmt=auto&qlt=default&$sfcc_tile$&w=680",
-                            IsDeleted = false,
-                            ManufacturerId = 1,
-                            Name = "Battery",
-                            Price = 120.00m,
-                            StockQuantity = 15,
-                            UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 3,
-                            DealerId = 1,
-                            Description = "BILSTEIN EVO T2 track performance suspension.",
-                            ImageUrl = "https://performance.bilstein.com/wp-content/uploads/2023/10/BILSTEIN-EVO-T2.png",
-                            IsDeleted = false,
-                            ManufacturerId = 2,
-                            Name = "BilsteinEvoT2",
-                            Price = 250.00m,
-                            StockQuantity = 5,
-                            UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            DealerId = 1,
-                            Description = "Brake pads convert the kinetic energy of a vehicle to thermal energy through friction. Two brake pads are contained in the brake with their friction surfaces facing the rotor.",
-                            ImageUrl = "https://www.buybrakes.com/images/product/brembo-oe-replacement-brake-pads.jpg",
-                            IsDeleted = false,
-                            ManufacturerId = 3,
-                            Name = "Brake pads",
-                            Price = 55.00m,
-                            StockQuantity = 30,
-                            UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e"
-                        });
                 });
 
             modelBuilder.Entity("AutoPartsWeb.Infrastructure.Data.Models.Rating", b =>
@@ -401,29 +295,6 @@ namespace AutoPartsWeb.Data.Migrations
                     b.ToTable("Ratings");
 
                     b.HasComment("Ratings table");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ProductId = 3,
-                            UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
-                            Value = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ProductId = 1,
-                            UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
-                            Value = 5
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ProductId = 2,
-                            UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
-                            Value = 5
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -541,38 +412,6 @@ namespace AutoPartsWeb.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4b087332-db7c-4812-b42d-f0899ee7645e",
-                            Email = "admint@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "admin@mail.com",
-                            NormalizedUserName = "admint@mail.com",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b80a0084-14ce-4408-b846-c423b2be00fc",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
-                        },
-                        new
-                        {
-                            Id = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "973d1e5c-24d3-48eb-b87d-c5a35987c44d",
-                            Email = "guest@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "guest@mail.com",
-                            NormalizedUserName = "guest@mail.com",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef5fac3c-48fb-48cb-9d48-23f8f499748e",
-                            TwoFactorEnabled = false,
-                            UserName = "guest@mail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

@@ -22,6 +22,8 @@
             builder.ApplyConfiguration(new ProductConfiguration(dataSeeder));
             builder.ApplyConfiguration(new UserConfiguration(dataSeeder));
             builder.ApplyConfiguration(new RatingConfiguration(dataSeeder));
+            builder.ApplyConfiguration(new OrderConfiguration(dataSeeder));
+            builder.ApplyConfiguration(new DealerConfiguration(dataSeeder));
 
             base.OnModelCreating(builder);
         }
@@ -32,5 +34,6 @@
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<Rating> Ratings { get; set; } = null!;
+        public DbSet<Dealer> Dealers { get; set; } = null!;
     }
 }
