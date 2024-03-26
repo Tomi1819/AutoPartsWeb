@@ -15,25 +15,36 @@
             this.repository = repository;
         }
 
-        public Task<bool> CreateDealerAsync(DealerFormViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> ExistsByIdAsync(string userId)
         {
             return await repository.AllReadOnly<Dealer>()
                 .AnyAsync(d => d.UserId == userId);
         }
 
-        public Task<int?> GetDealerIdAsync(string userId)
+        public async Task<int?> GetDealerIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            return (await repository.AllReadOnly<Dealer>()
+                 .FirstOrDefaultAsync(d => d.UserId == userId))?.Id;
         }
 
-        public Task<bool> NecessaryRequirementsAsync(DealerFormViewModel model)
+        public async Task<bool> NecessaryRequirementsAsync(DealerFormViewModel model)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadOnly<Dealer>()
+                .AnyAsync(d => d.CompanyName == model.CompanyName &&
+                d.CompanyNumber == model.CompanyNumber &&
+                d.Name == model.Name);
+        }
+        public async Task CreateDealerAsync(DealerFormViewModel model)
+        {
+            await repository.AddAsync(new Dealer()
+            {
+                Name = model.Name,
+                CompanyName = model.CompanyName,
+                CompanyNumber = model.CompanyNumber,
+                UserId = model.UserId,
+            });
+
+            await repository.SaveChangesAsync();
         }
     }
 }

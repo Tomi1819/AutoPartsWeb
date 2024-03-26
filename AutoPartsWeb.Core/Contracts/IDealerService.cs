@@ -6,7 +6,7 @@
     {
         Task<bool> ExistsByIdAsync(string userId);
         Task<bool> NecessaryRequirementsAsync(DealerFormViewModel model);
-        Task<bool> CreateDealerAsync(DealerFormViewModel model);
+        Task CreateDealerAsync(DealerFormViewModel model);
         Task<int?> GetDealerIdAsync(string userId);
     }
 }
