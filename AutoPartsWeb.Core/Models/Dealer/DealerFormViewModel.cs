@@ -6,25 +6,25 @@
     public class DealerFormViewModel
     {
         [Required(ErrorMessage = DealerRequiredErrorMessage)]
-        [StringLength(DealerMaxNameLenght, 
-            MinimumLength = DealerMinNameLenght, 
+        [StringLength(DealerMaxNameLength, 
+            MinimumLength = DealerMinNameLength, 
             ErrorMessage = DealerStringLenghtErrorMessage)]
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = DealerRequiredErrorMessage)]
-        [StringLength(DealerCompanyNameMaxLenght, 
-            MinimumLength = DealerCompanyNameMinLenght,
+        [StringLength(DealerCompanyNameMaxLength, 
+            MinimumLength = DealerCompanyNameMinLength,
             ErrorMessage = DealerStringLenghtErrorMessage)]
         public string CompanyName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = DealerRequiredErrorMessage)]
-        [StringLength(DealerCompanyNumberMaxLenght,
-            MinimumLength = DealerCompanyNumberMinLenght,
+        [StringLength(DealerCompanyNumberMaxLength,
+            MinimumLength = DealerCompanyNumberMinLength,
             ErrorMessage = DealerStringLenghtErrorMessage)]
         public string CompanyNumber { get; set; } = string.Empty;
 
-        [StringLength(DealerDescriptionMaxLenght,
-            MinimumLength = DealerDescriptionMinLenght,
+        [StringLength(DealerDescriptionMaxLength,
+            MinimumLength = DealerDescriptionMinLength,
             ErrorMessage = DealerStringLenghtErrorMessage)]
         public string Description { get; set; } = string.Empty;
 

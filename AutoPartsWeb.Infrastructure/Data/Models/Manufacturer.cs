@@ -17,12 +17,12 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(ManufacturerMaxNameLenght)]
+        [MaxLength(ManufacturerMaxNameLength)]
         [Comment("Manufacturer name")]
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(ManufacturerMaxCountryLenght)]
+        [MaxLength(ManufacturerMaxCountryLength)]
         [Comment("Manufacturer country")]
         public string Country { get; set; } = string.Empty;
 

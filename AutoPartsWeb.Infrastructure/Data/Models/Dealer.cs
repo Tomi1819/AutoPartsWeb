@@ -20,21 +20,21 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(DealerMaxNameLenght)]
+        [MaxLength(DealerMaxNameLength)]
         [Comment("Dealer name")]
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(DealerCompanyNameMaxLenght)]
+        [MaxLength(DealerCompanyNameMaxLength)]
         [Comment("Comapany name")]
         public string CompanyName { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(DealerCompanyNumberMaxLenght)]
+        [MaxLength(DealerCompanyNumberMaxLength)]
         [Comment("Comapany number")]
         public string CompanyNumber { get; set; } = string.Empty;
 
-        [MaxLength(DealerDescriptionMaxLenght)]
+        [MaxLength(DealerDescriptionMaxLength)]
         [Comment("Dealer description")]
         public string Description { get; set; } = string.Empty;
 

@@ -20,11 +20,11 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(ProductMaxNameLenght)]
+        [MaxLength(ProductMaxNameLength)]
         [Comment("Product name")]
         public string Name { get; set; } = string.Empty;
 
-        [MaxLength(ProductDescriptionMaxLenght)]
+        [MaxLength(ProductDescriptionMaxLength)]
         [Comment("Product description")]
         public string Description { get; set; } = string.Empty;
 

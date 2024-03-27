@@ -3,37 +3,37 @@
     public class ValidationConstants
     {
         //Category
-        public const int CategoryMinNameLenght = 4;
-        public const int CategoryMaxNameLenght = 50;
+        public const int CategoryMinNameLength = 4;
+        public const int CategoryMaxNameLength = 50;
 
         //Manufacturer
-        public const int ManufacturerMinNameLenght = 3;
-        public const int ManufacturerMaxNameLenght = 30;
-        public const int ManufacturerMinCountryLenght = 3;
-        public const int ManufacturerMaxCountryLenght = 20;
+        public const int ManufacturerMinNameLength = 3;
+        public const int ManufacturerMaxNameLength = 30;
+        public const int ManufacturerMinCountryLength = 3;
+        public const int ManufacturerMaxCountryLength = 20;
 
         //Product
-        public const int ProductMinNameLenght = 3;
-        public const int ProductMaxNameLenght = 25;
-        public const int ProductDescriptionMinLenght = 5;
-        public const int ProductDescriptionMaxLenght = 500;
+        public const int ProductMinNameLength = 3;
+        public const int ProductMaxNameLength = 25;
+        public const int ProductDescriptionMinLength = 5;
+        public const int ProductDescriptionMaxLength = 500;
 
         //Rating
         public const int MinRatingValue = 1;
         public const int MaxRatingValue = 5;
 
         //Dealer
-        public const int DealerMinNameLenght = 3;
-        public const int DealerMaxNameLenght = 50;
+        public const int DealerMinNameLength = 3;
+        public const int DealerMaxNameLength = 50;
 
-        public const int DealerCompanyNameMinLenght = 5;
-        public const int DealerCompanyNameMaxLenght = 100;
+        public const int DealerCompanyNameMinLength = 5;
+        public const int DealerCompanyNameMaxLength = 100;
 
-        public const int DealerCompanyNumberMinLenght = 10;
-        public const int DealerCompanyNumberMaxLenght = 25;
+        public const int DealerCompanyNumberMinLength = 10;
+        public const int DealerCompanyNumberMaxLength = 25;
 
-        public const int DealerDescriptionMinLenght = 15;
-        public const int DealerDescriptionMaxLenght = 500;
+        public const int DealerDescriptionMinLength = 15;
+        public const int DealerDescriptionMaxLength = 500;
 
         public const string DealerRequiredErrorMessage = "The {0} field is required";
         public const string DealerStringLenghtErrorMessage = "The {0} field must be {2} and {1} characters long";

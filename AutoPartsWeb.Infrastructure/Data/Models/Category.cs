@@ -17,7 +17,7 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(CategoryMaxNameLenght)]
+        [MaxLength(CategoryMaxNameLength)]
         [Comment("Category name")]
         public string Name { get; set; } = string.Empty;
 
