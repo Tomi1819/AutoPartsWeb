@@ -13,7 +13,7 @@
 
             IDealerService? dealerService = context.HttpContext.RequestServices.GetService<IDealerService>();
 
-            if (dealerService != null)
+            if (dealerService == null)
             {
                 context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
