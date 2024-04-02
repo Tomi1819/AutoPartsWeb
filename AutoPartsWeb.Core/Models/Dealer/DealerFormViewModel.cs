@@ -1,6 +1,7 @@
 ﻿namespace AutoPartsWeb.Core.Models.Dealer
 {
     using System.ComponentModel.DataAnnotations;
+    using static AutoPartsWeb.Core.Constants.MessageConstants;
     using static AutoPartsWeb.Infrastructure.DataConstants.ValidationConstants;
 
     public class DealerFormViewModel

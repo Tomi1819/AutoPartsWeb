@@ -35,10 +35,5 @@
         public const int DealerDescriptionMinLength = 15;
         public const int DealerDescriptionMaxLength = 500;
 
-        public const string DealerRequiredErrorMessage = "The {0} field is required";
-        public const string DealerStringLenghtErrorMessage = "The {0} field must be {2} and {1} characters long";
-
-        //DateTime
-        public const string DateTimeFormat = "dd/MM/yyyy HH:mm";
     }
 }
