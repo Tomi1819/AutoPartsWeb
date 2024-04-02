@@ -4,6 +4,7 @@
     using AutoPartsWeb.Core.Models.Dealer;
     using AutoPartsWeb.Infrastructure.Data.Common;
     using AutoPartsWeb.Infrastructure.Data.Models;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@
                  .FirstOrDefaultAsync(d => d.UserId == userId))?.Id;
         }
 
-        public async Task<bool> NecessaryRequirementsAsync(DealerFormViewModel model)
+        public async Task<bool> HasNecessaryRequirementsAsync(DealerFormViewModel model)
         {
             return await repository.AllReadOnly<Dealer>()
                 .AnyAsync(d => d.CompanyName == model.CompanyName &&
@@ -41,6 +42,7 @@
                 Name = model.Name,
                 CompanyName = model.CompanyName,
                 CompanyNumber = model.CompanyNumber,
+                Description = model.Description,
                 UserId = model.UserId,
             });
 

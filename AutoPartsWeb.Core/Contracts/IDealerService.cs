@@ -5,7 +5,7 @@
     public interface IDealerService
     {
         Task<bool> ExistsByIdAsync(string userId);
-        Task<bool> NecessaryRequirementsAsync(DealerFormViewModel model);
+        Task<bool> HasNecessaryRequirementsAsync(DealerFormViewModel model);
         Task CreateDealerAsync(DealerFormViewModel model);
         Task<int?> GetDealerIdAsync(string userId);
     }
