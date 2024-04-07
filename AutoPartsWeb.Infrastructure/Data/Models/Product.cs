@@ -46,7 +46,7 @@
         public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         [Comment("Manufacturer identifier")]
         public int ManufacturerId { get; set; }

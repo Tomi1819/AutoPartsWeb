@@ -7,6 +7,7 @@
     using AutoPartsWeb.Infrastructure.Data.Common;
     using AutoPartsWeb.Core.Contracts;
     using AutoPartsWeb.Core.Services;
+    using AutoPartsWeb.Infrastructure.Data.Models;
 
     public static class ServiceCollectionExtension
     {
@@ -36,7 +37,7 @@
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
             services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequireDigit = false;

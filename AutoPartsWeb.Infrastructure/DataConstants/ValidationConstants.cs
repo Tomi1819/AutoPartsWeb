@@ -35,5 +35,13 @@
         public const int DealerDescriptionMinLength = 15;
         public const int DealerDescriptionMaxLength = 500;
 
+
+        //ApplicationUser
+        public const int UserFirstNameMinLength = 2;
+        public const int UserFirstNameMaxLength = 15;
+
+        public const int UserLastNameMinLength = 3;
+        public const int UserLastNameMaxLength = 15;
+
     }
 }

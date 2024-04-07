@@ -6,8 +6,8 @@
 
     public class DataSeeder
     {
-        public IdentityUser AdminUser { get; set; } = null!;
-        public IdentityUser GuestUser { get; set; } = null!;
+        public ApplicationUser AdminUser { get; set; } = null!;
+        public ApplicationUser GuestUser { get; set; } = null!;
 
         public Dealer Dealer { get; set; } = null!;
 
@@ -42,22 +42,26 @@
 
         private void SeedUsers()
         {
-            AdminUser = new IdentityUser()
+            AdminUser = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
                 UserName = "admin@mail.com",
                 NormalizedUserName = "admint@mail.com",
                 Email = "admint@mail.com",
-                NormalizedEmail = "admin@mail.com"
+                NormalizedEmail = "admin@mail.com",
+                FirstName = "Jacob",
+                LastName = "Lugo"
             };
 
-            GuestUser = new IdentityUser()
+            GuestUser = new ApplicationUser()
             {
                 Id = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
                 UserName = "guest@mail.com",
                 NormalizedUserName = "guest@mail.com",
                 Email = "guest@mail.com",
-                NormalizedEmail = "guest@mail.com"
+                NormalizedEmail = "guest@mail.com",
+                FirstName = "Davis",
+                LastName = "Pope"
             };
         }
         private void SeedDealers()

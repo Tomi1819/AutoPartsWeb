@@ -45,7 +45,7 @@
         public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         [Comment("List of products offered by the dealer")]
         public ICollection<Product> Products { get; set; }

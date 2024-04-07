@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class AutoPartsWebDbContext : IdentityDbContext
+    public class AutoPartsWebDbContext : IdentityDbContext<ApplicationUser>
     {
         private readonly DataSeeder dataSeeder;
         public AutoPartsWebDbContext(DbContextOptions<AutoPartsWebDbContext> options)
