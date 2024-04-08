@@ -1,5 +1,8 @@
 using AutoPartsWeb.Extensions;
 using AutoPartsWeb.ModelBinders;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using AutoPartsWeb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
