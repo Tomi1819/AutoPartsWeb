@@ -24,6 +24,7 @@
             builder.ApplyConfiguration(new RatingConfiguration(dataSeeder));
             builder.ApplyConfiguration(new OrderConfiguration(dataSeeder));
             builder.ApplyConfiguration(new DealerConfiguration(dataSeeder));
+            builder.ApplyConfiguration(new UserClaimsConfiguration(dataSeeder));
 
             base.OnModelCreating(builder);
         }

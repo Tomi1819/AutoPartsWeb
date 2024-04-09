@@ -1,11 +1,13 @@
 ﻿namespace AutoPartsWeb.Infrastructure.Data.DataSeed
 {
     using AutoPartsWeb.Infrastructure.Data.Models;
-    using AutoPartsWeb.Infrastructure.DataConstants;
+    using static AutoPartsWeb.Infrastructure.DataConstants.CustomClaims;
     using Microsoft.AspNetCore.Identity;
-
     public class DataSeeder
     {
+        public IdentityUserClaim<string> AdminUserClaim { get; set; }
+        public IdentityUserClaim<string> GuestUserClaim { get; set; }
+
         public ApplicationUser AdminUser { get; set; } = null!;
         public ApplicationUser GuestUser { get; set; } = null!;
 
@@ -42,6 +44,8 @@
 
         private void SeedUsers()
         {
+            var hasher = new PasswordHasher<ApplicationUser>();            
+
             AdminUser = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
@@ -53,6 +57,16 @@
                 LastName = "Lugo"
             };
 
+            AdminUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 1,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Jacob Lugo",
+                UserId = "dea12856-c198-4129-b3f3-b893d8395082"
+            };
+
+            AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "azsumadmin");
+
             GuestUser = new ApplicationUser()
             {
                 Id = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
@@ -63,6 +77,16 @@
                 FirstName = "Davis",
                 LastName = "Pope"
             };
+
+            GuestUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 2,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Davis Pope",
+                UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e"
+            };
+
+            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "azsumguest");
         }
         private void SeedDealers()
         {
