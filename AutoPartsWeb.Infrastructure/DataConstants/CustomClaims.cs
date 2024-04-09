@@ -1,4 +1,4 @@
-﻿namespace AutoPartsWeb.Core.Constants
+﻿namespace AutoPartsWeb.Infrastructure.DataConstants
 {
     public static class CustomClaims
     {
