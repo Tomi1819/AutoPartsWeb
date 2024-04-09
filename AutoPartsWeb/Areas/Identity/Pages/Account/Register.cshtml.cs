@@ -13,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using static AutoPartsWeb.Infrastructure.DataConstants.ValidationConstants;
-using static AutoPartsWeb.Core.Constants.CustomClaims;
+using static AutoPartsWeb.Infrastructure.DataConstants.CustomClaims;
 
 namespace HouseRentingSystem.Areas.Identity.Pages.Account
 {
