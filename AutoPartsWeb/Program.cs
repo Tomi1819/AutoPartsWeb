@@ -40,4 +40,6 @@ app.UseAuthorization();
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
+await app.CreateAdminRoleAsync();
+
 app.Run();
