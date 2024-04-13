@@ -16,6 +16,49 @@
             this.repository = repository;
         }
 
+        public async Task<int> CreateAsync(ProductFormViewModel model, int dealerId)
+        {
+            var product = new Product()
+            {
+                Id = model.Id,
+                Name = model.Title,
+                Description = model.Description,
+                Price = model.Price,
+                StockQuantity = model.Quantity,
+                ImageUrl = model.ImageUrl,
+                CategoryId = model.CategoryId,
+                ManufacturerId = model.ManufacturerId,
+                DealerId = dealerId,
+            };
+
+            await repository.AddAsync(product);
+            await repository.SaveChangesAsync();
+
+            return product.Id;
+        }
+
+        public async Task<IEnumerable<AllCategoriesViewModel>> GetAllCategoriesAsync()
+        {
+            return await repository.AllReadOnly<Category>()
+                .Select(c => new AllCategoriesViewModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<AllManufacturersViewModel>> GetAllManufacturersAsync()
+        {
+            return await repository.AllReadOnly<Manufacturer>()
+                .Select(m => new AllManufacturersViewModel()
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                })
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<ProductIndexViewModel>> GetAllProductsAsync()
         {
             return await repository
