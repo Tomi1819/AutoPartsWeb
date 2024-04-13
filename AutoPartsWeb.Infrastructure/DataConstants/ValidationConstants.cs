@@ -17,10 +17,12 @@
         public const int ProductMaxNameLength = 25;
         public const int ProductDescriptionMinLength = 5;
         public const int ProductDescriptionMaxLength = 500;
-
-        //Rating
+        public const string ProductMinPrice = "0.0m";
+        public const string ProductMaxPrice = "10000.0m";
         public const int MinRatingValue = 1;
         public const int MaxRatingValue = 5;
+        public const int MinProductQuantity = 1;
+        public const int MaxProductQuantity = 100;
 
         //Dealer
         public const int DealerMinNameLength = 3;
@@ -34,7 +36,6 @@
 
         public const int DealerDescriptionMinLength = 15;
         public const int DealerDescriptionMaxLength = 500;
-
 
         //ApplicationUser
         public const int UserFirstNameMinLength = 2;
