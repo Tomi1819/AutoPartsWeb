@@ -17,7 +17,8 @@
             builder.HasData(new ApplicationUser[]
             {
                 dataSeeder.AdminUser,
-                dataSeeder.GuestUser
+                dataSeeder.GuestUser,
+                dataSeeder.DealerUser
             });
         }
     }

@@ -1,35 +1,39 @@
-﻿namespace AutoPartsWeb.Infrastructure.Data.DataSeed
+﻿using AutoPartsWeb.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using static AutoPartsWeb.Infrastructure.DataConstants.CustomClaims;
+
+namespace AutoPartsWeb.Infrastructure.Data.DataSeed
 {
-    using AutoPartsWeb.Infrastructure.Data.Models;
-    using static AutoPartsWeb.Infrastructure.DataConstants.CustomClaims;
-    using Microsoft.AspNetCore.Identity;
     public class DataSeeder
     {
+        public ApplicationUser AdminUser { get; set; }
+        public ApplicationUser GuestUser { get; set; }
+        public ApplicationUser DealerUser { get; set; }
+
         public IdentityUserClaim<string> AdminUserClaim { get; set; }
         public IdentityUserClaim<string> GuestUserClaim { get; set; }
+        public IdentityUserClaim<string> DealerUserClaim { get; set; }
 
-        public ApplicationUser AdminUser { get; set; } = null!;
-        public ApplicationUser GuestUser { get; set; } = null!;
+        public Dealer Dealer { get; set; }
+        public Dealer AdminDealer { get; set; }
 
-        public Dealer Dealer { get; set; } = null!;
+        public Category EngineCategory { get; set; }
+        public Category BrakesCategory { get; set; }
+        public Category SuspensionCategory { get; set; }
 
-        public Category EngineCategory { get; set; } = null!;
-        public Category BrakesCategory { get; set; } = null!;
-        public Category SuspensionCategory { get; set; } = null!;
+        public Manufacturer Bosch { get; set; }
+        public Manufacturer Bilstein { get; set; }
+        public Manufacturer Brembo { get; set; }
 
-        public Manufacturer Bosh { get; set; } = null!;
-        public Manufacturer Bilstein { get; set; } = null!;
-        public Manufacturer Brembo { get; set; } = null!;
+        public Product Battery { get; set; }
+        public Product BilsteinEvoT2 { get; set; }
+        public Product BrakePads { get; set; }
 
-        public Product Battery { get; set; } = null!;
-        public Product BilsteinEvoT2 { get; set; } = null!;
-        public Product BrakePads { get; set; } = null!;
+        public Rating First { get; set; }
+        public Rating Second { get; set; }
+        public Rating Third { get; set; }
 
-        public Rating First { get; set; } = null!;
-        public Rating Second { get; set; } = null!;
-        public Rating Third { get; set; } = null!;
-
-        public Order Order { get; set; } = null!;
+        public Order Order { get; set; }
 
         public DataSeeder()
         {
@@ -44,13 +48,34 @@
 
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<ApplicationUser>();            
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            DealerUser = new ApplicationUser()
+            {
+                Id = "1a558517-6bd0-4da4-9a6c-e5d92df0a945",
+                UserName = "dealer@mail.com",
+                NormalizedUserName = "dealer@mail.com",
+                Email = "dealer@mail.com",
+                NormalizedEmail = "dealer@mail.com",
+                FirstName = "Jake",
+                LastName = "Paul"
+            };
+
+            DealerUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 4,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Jake Paul",
+                UserId = "1a558517-6bd0-4da4-9a6c-e5d92df0a945"
+            };
+
+            DealerUser.PasswordHash = hasher.HashPassword(DealerUser, "azsumdealer");
 
             AdminUser = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
                 UserName = "admin@mail.com",
-                NormalizedUserName = "admint@mail.com",
+                NormalizedUserName = "admin@mail.com",
                 Email = "admint@mail.com",
                 NormalizedEmail = "admin@mail.com",
                 FirstName = "Jacob",
@@ -87,6 +112,7 @@
             };
 
             GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "azsumguest");
+
         }
         private void SeedDealers()
         {
@@ -97,6 +123,17 @@
                 CompanyName = "AutoTrader",
                 CompanyNumber = "7516425943",
                 Description = "The biggest auto parts dealer in Bulgaria.",
+                IsDeleted = false,
+                UserId = DealerUser.Id
+            };
+
+            AdminDealer = new Dealer()
+            {
+                Id = 2,
+                Name = "Admin",
+                CompanyName = "AdminHouse",
+                CompanyNumber = "5212222222",
+                Description = "Nothing special about description.",
                 IsDeleted = false,
                 UserId = AdminUser.Id
             };
@@ -138,10 +175,10 @@
         }
         private void SeedManufacturers()
         {
-            Bosh = new Manufacturer()
+            Bosch = new Manufacturer()
             {
                 Id = 1,
-                Name = "Bosh",
+                Name = "Bosch",
                 Country = "Germany",
                 IsDeleted = false
             };
@@ -175,7 +212,7 @@
                 ImageUrl = "https://cdn.media.halfords.com/i/washford/950295/Halfords-HB063-Lead-Acid-12V-Car-Battery-3-Year-Guarantee?fmt=auto&qlt=default&$sfcc_tile$&w=680",
                 IsDeleted = false,
                 UserId = GuestUser.Id,
-                ManufacturerId = Bosh.Id,
+                ManufacturerId = Bosch.Id,
                 CategoryId = EngineCategory.Id,
                 DealerId = Dealer.Id,
             };
@@ -184,30 +221,30 @@
             {
                 Id = 2,
                 Name = "BilsteinEvoT2",
-                Description = "BILSTEIN EVO T2 track performance suspension.",
-                Price = 250.00m,
+                Description = "BILSTEIN EVO T2 track performance, a winning combination of BILSTEIN monotube technology and ST suspensions coilovers.",
+                Price = 899.99m,
                 StockQuantity = 5,
-                ImageUrl = "https://performance.bilstein.com/wp-content/uploads/2023/10/BILSTEIN-EVO-T2.png",
+                ImageUrl = "https://www.buybrakes.com/images/product/bilstein-6112-suspension-kit.jpg",
                 IsDeleted = false,
                 UserId = GuestUser.Id,
                 ManufacturerId = Bilstein.Id,
                 CategoryId = SuspensionCategory.Id,
-                DealerId = Dealer.Id
+                DealerId = Dealer.Id,
             };
 
             BrakePads = new Product()
             {
                 Id = 3,
-                Name = "Brake pads",
-                Description = "Brake pads convert the kinetic energy of a vehicle to thermal energy through friction. Two brake pads are contained in the brake with their friction surfaces facing the rotor.",
-                Price = 55.00m,
-                StockQuantity = 30,
-                ImageUrl = "https://www.buybrakes.com/images/product/brembo-oe-replacement-brake-pads.jpg",
+                Name = "Brake Pads",
+                Description = "A brake pad is a component of disc brakes, used in automotive and other applications.",
+                Price = 65.00m,
+                StockQuantity = 20,
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQQZ_AsODk3OKfTO8mqm9ZHU56YW5KL0ovBXFdmipZvg&s",
                 IsDeleted = false,
-                UserId = GuestUser.Id,
+                UserId = DealerUser.Id,
                 ManufacturerId = Brembo.Id,
                 CategoryId = BrakesCategory.Id,
-                DealerId = Dealer.Id
+                DealerId = Dealer.Id,
             };
         }
 
@@ -216,25 +253,25 @@
             First = new Rating()
             {
                 Id = 1,
-                Value = 4,
-                ProductId = 3,
-                UserId = GuestUser.Id,
+                Value = 5,
+                ProductId = Battery.Id,
+                UserId = GuestUser.Id
             };
 
             Second = new Rating()
             {
                 Id = 2,
-                Value = 5,
-                ProductId = 1,
-                UserId = GuestUser.Id,
+                Value = 4,
+                ProductId = BilsteinEvoT2.Id,
+                UserId = AdminUser.Id
             };
 
             Third = new Rating()
             {
                 Id = 3,
                 Value = 5,
-                ProductId = 2,
-                UserId = GuestUser.Id,
+                ProductId = BrakePads.Id,
+                UserId = DealerUser.Id
             };
         }
     }

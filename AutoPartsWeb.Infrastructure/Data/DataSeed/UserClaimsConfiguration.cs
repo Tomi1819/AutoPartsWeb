@@ -20,7 +20,7 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
 
         public void Configure(EntityTypeBuilder<IdentityUserClaim<string>> builder)
         {
-            builder.HasData(dataSeeder.GuestUserClaim, dataSeeder.AdminUserClaim);
+            builder.HasData(dataSeeder.GuestUserClaim, dataSeeder.AdminUserClaim, dataSeeder.DealerUserClaim);
         }
     }
 }

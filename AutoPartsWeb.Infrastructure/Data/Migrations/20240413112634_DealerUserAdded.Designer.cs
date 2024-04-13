@@ -4,6 +4,7 @@ using AutoPartsWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoPartsWeb.Data.Migrations
 {
     [DbContext(typeof(AutoPartsWebDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240413112634_DealerUserAdded")]
+    partial class DealerUserAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +103,7 @@ namespace AutoPartsWeb.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8af6590-3724-4751-93fb-d69d9d76158e",
+                            ConcurrencyStamp = "9ca74296-d185-41af-996a-7847516a412f",
                             Email = "admint@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Jacob",
@@ -109,9 +111,9 @@ namespace AutoPartsWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG1ns9MtznAmXVGSL1jHIlPpdsZlSDIvRcJkTCr89FCu15HZArr2X8MdtPwj/jayPg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJH9pFPZecGH1uHFnSurk1kyeTskjywWl/vFO+fX2iHU6HJIewF0kY/obP/c/QJuIw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "831f6579-7169-4f04-a97e-2d716e16f31f",
+                            SecurityStamp = "4f2b9b1b-fd92-416f-b301-a7a3a4b99840",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         },
@@ -119,7 +121,7 @@ namespace AutoPartsWeb.Data.Migrations
                         {
                             Id = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ec41726e-5e58-4a33-af72-f408a90e9951",
+                            ConcurrencyStamp = "d9b08982-5ff3-49a5-8a83-5f639a6efd03",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Davis",
@@ -127,9 +129,9 @@ namespace AutoPartsWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJZODGXhdFzO2MFQ/iJv+BzRE82MeV5UtmKle6brSwufIYChPbG9KWS2EtqsWkPkcQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPqykXT1kPhxqTU3zboEZ3p+rjhdrJ5U8eB5K6F9VtQwF08NiTFEQuKI9uRXFMHWMQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5fd7d0da-45d4-4628-8d57-074c82fa7036",
+                            SecurityStamp = "5579a4a1-9c6b-4323-8b14-b5e61f59fcd7",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -137,7 +139,7 @@ namespace AutoPartsWeb.Data.Migrations
                         {
                             Id = "1a558517-6bd0-4da4-9a6c-e5d92df0a945",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fc28beca-6ad1-4a7a-a13b-9cca071e1798",
+                            ConcurrencyStamp = "38350159-bf6a-441b-b54f-920212e3410e",
                             Email = "dealer@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Jake",
@@ -145,9 +147,9 @@ namespace AutoPartsWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "dealer@mail.com",
                             NormalizedUserName = "dealer@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGou4j/+D6d7rwhlfq7RIVixQo5VE6qF33CcRQUlqTxzg0gEBPO0xtp+DU9vDyfwhw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGT151vor56OUHNTM+kqkqiIcHA832uFvaAYCZr129jfKI9A0oY3cQ/S1BpvieRZqQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c01c8893-66ea-440c-a9fd-e043e3e23dba",
+                            SecurityStamp = "1677ac3d-3f7b-4a69-873f-8fd69beedf2f",
                             TwoFactorEnabled = false,
                             UserName = "dealer@mail.com"
                         });
@@ -312,7 +314,7 @@ namespace AutoPartsWeb.Data.Migrations
                             Id = 1,
                             Country = "Germany",
                             IsDeleted = false,
-                            Name = "Bosch"
+                            Name = "Bosh"
                         });
                 });
 
@@ -477,7 +479,7 @@ namespace AutoPartsWeb.Data.Migrations
                             CategoryId = 3,
                             DealerId = 1,
                             Description = "BILSTEIN EVO T2 track performance, a winning combination of BILSTEIN monotube technology and ST suspensions coilovers.",
-                            ImageUrl = "https://www.buybrakes.com/images/product/bilstein-6112-suspension-kit.jpg",
+                            ImageUrl = "https://www.tuningblog.eu/wp-content/uploads/2017/03/Bilstein-EVO-T2-900PS-Kraftkur-BMW-M3-E92-1.jpg",
                             IsDeleted = false,
                             ManufacturerId = 2,
                             Name = "BilsteinEvoT2",
@@ -491,7 +493,7 @@ namespace AutoPartsWeb.Data.Migrations
                             CategoryId = 2,
                             DealerId = 1,
                             Description = "A brake pad is a component of disc brakes, used in automotive and other applications.",
-                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQQZ_AsODk3OKfTO8mqm9ZHU56YW5KL0ovBXFdmipZvg&s",
+                            ImageUrl = "https://cdn.shopify.com/s/files/1/0234/1883/5859/products/fcpgroton-volvo-brake-pads_480x480.jpg?v=1588090853",
                             IsDeleted = false,
                             ManufacturerId = 3,
                             Name = "Brake Pads",
