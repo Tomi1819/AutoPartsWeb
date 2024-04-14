@@ -17,8 +17,8 @@
         public const int ProductMaxNameLength = 25;
         public const int ProductDescriptionMinLength = 5;
         public const int ProductDescriptionMaxLength = 500;
-        public const string ProductMinPrice = "0.0m";
-        public const string ProductMaxPrice = "10000.0m";
+        public const string ProductMinPrice = "0";
+        public const string ProductMaxPrice = "10000";
         public const int MinRatingValue = 1;
         public const int MaxRatingValue = 5;
         public const int MinProductQuantity = 1;
