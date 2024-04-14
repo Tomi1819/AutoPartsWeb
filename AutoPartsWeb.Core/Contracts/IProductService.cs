@@ -11,5 +11,7 @@
         Task<IEnumerable<AllCategoriesViewModel>> GetAllCategoriesAsync();
         Task<IEnumerable<AllManufacturersViewModel>> GetAllManufacturersAsync();
         Task<int> CreateAsync(ProductFormViewModel model, int dealerId);
+        Task<bool> CategoryExistsAsync(int categoryId);
+        Task<bool> ManufacturerExistAsync(int manufacturerId);
     }
 }

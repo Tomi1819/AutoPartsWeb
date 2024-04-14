@@ -16,11 +16,25 @@
             this.repository = repository;
         }
 
+        public async Task<bool> CategoryExistsAsync(int categoryId)
+        {
+            return await repository.AllReadOnly<Category>()
+                .Where(c => c.IsDeleted == false)
+                .AnyAsync(c => c.Id == categoryId);
+        }
+
         public async Task<int> CreateAsync(ProductFormViewModel model, int dealerId)
         {
-            var product = new Product()
+            var dealer = await repository.AllReadOnly<Dealer>()
+                .FirstOrDefaultAsync(d => d.Id == dealerId);
+
+            if (dealer == null)
             {
-                Id = model.Id,
+                throw new ArgumentException("Dealer with the provided ID does not exist.");
+            }
+
+            var product = new Product
+            {
                 Name = model.Title,
                 Description = model.Description,
                 Price = model.Price,
@@ -29,7 +43,17 @@
                 CategoryId = model.CategoryId,
                 ManufacturerId = model.ManufacturerId,
                 DealerId = dealerId,
+                UserId = dealer.UserId
             };
+
+            var rating = new Rating()
+            {
+                ProductId = product.Id,
+                UserId = product.UserId,
+                Value = model.Rating
+            };
+
+            product.Ratings.Add(rating);
 
             await repository.AddAsync(product);
             await repository.SaveChangesAsync();
@@ -40,6 +64,7 @@
         public async Task<IEnumerable<AllCategoriesViewModel>> GetAllCategoriesAsync()
         {
             return await repository.AllReadOnly<Category>()
+                .Where(c => c.IsDeleted == false)
                 .Select(c => new AllCategoriesViewModel()
                 {
                     Id = c.Id,
@@ -51,6 +76,7 @@
         public async Task<IEnumerable<AllManufacturersViewModel>> GetAllManufacturersAsync()
         {
             return await repository.AllReadOnly<Manufacturer>()
+                .Where(m => m.IsDeleted == false)
                 .Select(m => new AllManufacturersViewModel()
                 {
                     Id = m.Id,
@@ -95,6 +121,13 @@
                 .FirstOrDefaultAsync();
 
             return product;
+        }
+
+        public async Task<bool> ManufacturerExistAsync(int manufacturerId)
+        {
+            return await repository.AllReadOnly<Manufacturer>()
+                .Where(m => m.IsDeleted == false)
+                .AnyAsync(m => m.Id == manufacturerId);
         }
 
         public async Task<IEnumerable<ProductSearchViewModel>> SearchProductsAsync(string keywords)
