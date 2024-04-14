@@ -13,5 +13,7 @@
         [Required]
         [MaxLength(UserLastNameMaxLength)]
         public string LastName { get; set; } = string.Empty;
+
+        public Dealer? Dealer { get; set; }
     }
 }
