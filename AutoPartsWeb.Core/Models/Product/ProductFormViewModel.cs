@@ -23,7 +23,7 @@
         [StringLength(ProductDescriptionMaxLength,
             MinimumLength = ProductDescriptionMinLength,
             ErrorMessage = StringLenghtErrorMessage)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         [Range(typeof(decimal),
@@ -34,26 +34,22 @@
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        [StringLength(MaxRatingValue, 
-            MinimumLength = MinRatingValue,
-            ErrorMessage = StringLenghtErrorMessage)]
+        [Range(MinRatingValue, MaxRatingValue, ErrorMessage = "The rating must be between {1} and {2}")]
         public int Rating { get; set; }
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         public string ImageUrl { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredErrorMessage)]
-        [StringLength(MaxProductQuantity,
-            MinimumLength = MinProductQuantity,
-            ErrorMessage = StringLenghtErrorMessage)]
+        [Range(MinProductQuantity, MaxProductQuantity, ErrorMessage = "The quantity must be between {1} and {2}")]
         public int Quantity { get; set; }
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        public IReadOnlyCollection<AllCategoriesViewModel> Categories { get; set; }
+        public IEnumerable<AllCategoriesViewModel> Categories { get; set; }
 
         [Display(Name = "Manufacturer")]
         public int ManufacturerId { get; set; }
-        public IReadOnlyCollection<AllManufacturersViewModel> Manufacturers { get; set; }
+        public IEnumerable<AllManufacturersViewModel> Manufacturers { get; set; }
     }
 }
