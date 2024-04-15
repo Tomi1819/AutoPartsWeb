@@ -5,7 +5,7 @@
 
     public interface IProductService
     {
-        Task<IEnumerable<ProductIndexViewModel>> GetAllProductsAsync();
+        Task<AllProductsViewModel> GetAllProductsAsync(int pageNumber, int pageSize);
         Task<IEnumerable<ProductSearchViewModel>> SearchProductsAsync(string keywords);
         Task<ProductDetailsViewModel> GetProductByIdAsync(int id);
         Task<IEnumerable<AllCategoriesViewModel>> GetAllCategoriesAsync();

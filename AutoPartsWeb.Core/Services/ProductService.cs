@@ -85,20 +85,35 @@
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ProductIndexViewModel>> GetAllProductsAsync()
+        public async Task<AllProductsViewModel> GetAllProductsAsync(int pageNumber, int pageSize)
         {
-            return await repository
+            var totalParts = await repository
                 .AllReadOnly<Product>()
-                .Where(p => p.IsDeleted == false)
-                .Select(p => new ProductIndexViewModel()
+                .CountAsync();
+
+            var totalPages = (int)Math.Ceiling(totalParts / (double)pageSize);
+            var currentPage = Math.Max(1, Math.Min(pageNumber, totalPages));
+
+            var products = await repository.AllReadOnly<Product>()
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => new ProductIndexViewModel
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     Price = p.Price,
-                    ImageUrl = p.ImageUrl,
+                    ImageUrl = p.ImageUrl
                 })
                 .ToListAsync();
+
+            return new AllProductsViewModel
+            {
+                Products = products,
+                PageNumber = currentPage,
+                PageSize = pageSize,
+                TotalPages = totalPages
+            };
         }
 
         public async Task<ProductDetailsViewModel> GetProductByIdAsync(int id)
