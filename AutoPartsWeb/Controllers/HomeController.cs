@@ -1,8 +1,11 @@
 ﻿using AutoPartsWeb.Core.Contracts;
+using AutoPartsWeb.Core.Models.Home;
 using AutoPartsWeb.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Drawing.Printing;
 
 namespace AutoPartsWeb.Controllers
 {
@@ -25,11 +28,11 @@ namespace AutoPartsWeb.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        [HttpGet]
+        public async Task<IActionResult> All([FromQuery] AllProductsViewModel model)
         {
-            var model = await productService.GetAllProductsAsync();
-
-            return View(model);
+            var products = await productService.GetAllProductsAsync(model.PageNumber, model.PageSize);
+            return View(products);
         }
 
         [AllowAnonymous]
