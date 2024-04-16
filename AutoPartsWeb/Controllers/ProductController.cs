@@ -3,6 +3,7 @@
     using AutoPartsWeb.Attributes;
     using AutoPartsWeb.Core.Contracts;
     using AutoPartsWeb.Core.Models.Product;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.DotNet.Scaffolding.Shared.Project;
     using System.Security.Claims;
@@ -73,6 +74,66 @@
             var newProductId = await productService.CreateAsync(model, dealerId ?? 0);
 
             return RedirectToAction(nameof(Details), new { id = newProductId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await productService.ProductExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            var product = await productService.GetProductByIdAsync(id);
+
+            if (User.Id() != product.UserId)
+            {
+                return Unauthorized();
+            }
+
+            var categories = await productService.GetAllCategoriesAsync();
+            var manufacturers = await productService.GetAllManufacturersAsync();
+
+            product.Categories = categories;
+            product.Manufacturers = manufacturers;
+
+            return View(product);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Dealer")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, ProductFormViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var categories = await productService.GetAllCategoriesAsync();
+                var manufacturers = await productService.GetAllManufacturersAsync();
+                model.Categories = categories;
+                model.Manufacturers = manufacturers;
+
+                return View(model);
+            }
+
+            if (!await productService.ProductExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var product = await productService.GetProductByIdAsync(id);
+            if (User.Id() != product.UserId)
+            {
+                return Unauthorized();
+            }
+
+            await productService.EditProductAsync(model, product.Id);
+
+            return RedirectToAction(nameof(Details), new { id = model.Id });
         }
     }
 }

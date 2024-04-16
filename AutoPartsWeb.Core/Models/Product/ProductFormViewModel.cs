@@ -18,7 +18,7 @@
         [StringLength(ProductMaxNameLength, 
             MinimumLength = ProductMinNameLength,
             ErrorMessage = StringLenghtErrorMessage)]
-        public string Title { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [StringLength(ProductDescriptionMaxLength,
             MinimumLength = ProductDescriptionMinLength,
@@ -51,5 +51,8 @@
         [Display(Name = "Manufacturer")]
         public int ManufacturerId { get; set; }
         public IEnumerable<AllManufacturersViewModel> Manufacturers { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public string ManufacturerName { get; set; } = string.Empty;
+        public string CategoryName { get; set; } = string.Empty;
     }
 }

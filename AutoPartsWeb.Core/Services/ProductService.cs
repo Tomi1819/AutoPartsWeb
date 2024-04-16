@@ -35,7 +35,7 @@
 
             var product = new Product
             {
-                Name = model.Title,
+                Name = model.Name,
                 Description = model.Description,
                 Price = model.Price,
                 StockQuantity = model.Quantity,
@@ -59,6 +59,26 @@
             await repository.SaveChangesAsync();
 
             return product.Id;
+        }
+
+        public async Task EditProductAsync(ProductFormViewModel model, int productId)
+        {
+            var productToEdit = await repository
+                .All<Product>()
+                .Where(p => p.IsDeleted == false)
+                .FirstOrDefaultAsync (d => d.Id == productId);
+
+            if (productToEdit != null)
+            {
+                productToEdit.Name = model.Name;
+                productToEdit.Description = model.Description;
+                productToEdit.Price = model.Price;
+                productToEdit.StockQuantity = model.Quantity;
+                productToEdit.ManufacturerId = model.ManufacturerId;
+                productToEdit.CategoryId = model.CategoryId;
+            }
+
+            await repository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<AllCategoriesViewModel>> GetAllCategoriesAsync()
@@ -116,12 +136,12 @@
             };
         }
 
-        public async Task<ProductDetailsViewModel> GetProductByIdAsync(int id)
+        public async Task<ProductFormViewModel> GetProductByIdAsync(int id)
         {
             var product = await repository
-                .AllReadOnly<Product>()
+                .All<Product>()
                 .Where(p => p.Id == id && p.IsDeleted == false)
-                .Select(p => new ProductDetailsViewModel()
+                .Select(p => new ProductFormViewModel()
                 {
                     Id = p.Id,
                     Name = p.Name,
@@ -129,7 +149,8 @@
                     Price = p.Price,
                     ImageUrl = p.ImageUrl,
                     Quantity = p.StockQuantity,
-                    Rating = p.Ratings.Any() ? p.Ratings.Average(r => r.Value) : 0,
+                    Rating = p.Ratings.Any() ? (int)p.Ratings.Average(r => r.Value) : 0,
+                    UserId = p.UserId,
                     ManufacturerName = p.Manufacturer.Name,
                     CategoryName = p.Category.Name
                 })
@@ -143,6 +164,13 @@
             return await repository.AllReadOnly<Manufacturer>()
                 .Where(m => m.IsDeleted == false)
                 .AnyAsync(m => m.Id == manufacturerId);
+        }
+
+        public async Task<bool> ProductExistsAsync(int productId)
+        {
+            return await repository
+                .AllReadOnly<Product>()
+                .AnyAsync(p => p.Id == productId);
         }
 
         public async Task<IEnumerable<ProductSearchViewModel>> SearchProductsAsync(string keywords)
