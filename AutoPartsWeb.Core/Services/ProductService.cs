@@ -61,6 +61,17 @@
             return product.Id;
         }
 
+        public async Task DeleteProductAsync(int productId)
+        {
+            var product = await repository.GetByIdAsync<Product>(productId);
+
+            if (product != null && product.IsDeleted == false)
+            {
+                product.IsDeleted = true;
+                await repository.SaveChangesAsync();
+            }
+        }
+
         public async Task EditProductAsync(ProductFormViewModel model, int productId)
         {
             var productToEdit = await repository
@@ -109,12 +120,14 @@
         {
             var totalParts = await repository
                 .AllReadOnly<Product>()
+                .Where(p => p.IsDeleted == false)
                 .CountAsync();
 
             var totalPages = (int)Math.Ceiling(totalParts / (double)pageSize);
             var currentPage = Math.Max(1, Math.Min(pageNumber, totalPages));
 
             var products = await repository.AllReadOnly<Product>()
+                .Where (p => p.IsDeleted == false)
                 .Skip((currentPage - 1) * pageSize)
                 .Take(pageSize)
                 .Select(p => new ProductIndexViewModel
@@ -139,7 +152,7 @@
         public async Task<ProductFormViewModel> GetProductByIdAsync(int id)
         {
             var product = await repository
-                .All<Product>()
+                .AllReadOnly<Product>()
                 .Where(p => p.Id == id && p.IsDeleted == false)
                 .Select(p => new ProductFormViewModel()
                 {

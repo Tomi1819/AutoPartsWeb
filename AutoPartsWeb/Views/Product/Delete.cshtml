@@ -1,0 +1,20 @@
+﻿@model ProductFormViewModel
+
+<h2>Delete Product</h2>
+
+<p>Are you sure you want to delete the following product?</p>
+
+<div class="product-details">
+    <h3>@Model.Name</h3>
+    <p>@Model.Description</p>
+    <p>Price: @Model.Price</p>
+    <p>Quantity: @Model.Quantity</p>
+    <p>Rating: @Model.Rating</p>
+    <p><strong>Category:</strong> @Model.CategoryName</p>
+    <p><strong>Rating:</strong> @Model.Rating</p>
+</div>
+
+<form asp-controller="Product" asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+</form>

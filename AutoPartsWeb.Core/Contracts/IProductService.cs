@@ -15,5 +15,6 @@
         Task<bool> ManufacturerExistAsync(int manufacturerId);
         Task EditProductAsync(ProductFormViewModel model, int productId);
         Task<bool> ProductExistsAsync(int productId);
+        Task DeleteProductAsync(int productId);
     }
 }

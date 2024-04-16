@@ -19,7 +19,7 @@
             <p><strong>Rating:</strong> @Model.Rating</p>
             <div class="btn-group mt-3">
                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger">Delete</a>
             </div>
         </div>
     </div>

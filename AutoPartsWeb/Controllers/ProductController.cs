@@ -135,5 +135,31 @@
 
             return RedirectToAction(nameof(Details), new { id = model.Id });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var productToDelete = await productService.GetProductByIdAsync(id);
+
+            if (productToDelete == null)
+            {
+                return NotFound();
+            }
+
+            if (User.Id() != productToDelete.UserId)
+            {
+                return Unauthorized();
+            }
+
+            return View(productToDelete);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await productService.DeleteProductAsync(id);
+            return RedirectToAction("All","Home");
+        }
     }
 }
