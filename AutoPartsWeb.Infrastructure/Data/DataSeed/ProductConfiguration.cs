@@ -24,7 +24,11 @@
             {
                 dataSeeder.Battery,
                 dataSeeder.BilsteinEvoT2,
-                dataSeeder.BrakePads
+                dataSeeder.BrakePads,
+                dataSeeder.TimingBelt,
+                dataSeeder.BrakeDisc,
+                dataSeeder.XenarcBulb,
+                dataSeeder.WindshieldWipers
             });
         }
     }

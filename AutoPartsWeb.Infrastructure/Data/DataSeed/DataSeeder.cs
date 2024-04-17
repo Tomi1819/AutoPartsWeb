@@ -20,18 +20,28 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
         public Category EngineCategory { get; set; }
         public Category BrakesCategory { get; set; }
         public Category SuspensionCategory { get; set; }
+        public Category ExteriorCategory { get; set; }
 
         public Manufacturer Bosch { get; set; }
         public Manufacturer Bilstein { get; set; }
         public Manufacturer Brembo { get; set; }
+        public Manufacturer Osram { get; set; }
 
         public Product Battery { get; set; }
         public Product BilsteinEvoT2 { get; set; }
         public Product BrakePads { get; set; }
+        public Product BrakeDisc { get; set; }
+        public Product TimingBelt { get; set; }
+        public Product XenarcBulb { get; set; }
+        public Product WindshieldWipers { get; set; }
 
         public Rating First { get; set; }
         public Rating Second { get; set; }
         public Rating Third { get; set; }
+        public Rating Forth { get; set; }
+        public Rating Fifth { get; set; }
+        public Rating Sixth { get; set; }
+        public Rating Seventh { get; set; }
 
         public Order Order { get; set; }
 
@@ -161,6 +171,13 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
                 Name = "Suspension",
                 IsDeleted = false,
             };
+
+            ExteriorCategory = new Category()
+            {
+                Id = 4,
+                Name = "Exterior",
+                IsDeleted = false
+            };
         }
 
         private void SeedOrders()
@@ -198,6 +215,14 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
                 Country = "Italy",
                 IsDeleted = false
             };
+
+            Osram = new Manufacturer()
+            {
+                Id = 4,
+                Name = "Osram",
+                Country = "Germany",
+                IsDeleted = false,
+            };
         }
 
         private void SeedProducts()
@@ -214,7 +239,7 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
                 UserId = GuestUser.Id,
                 ManufacturerId = Bosch.Id,
                 CategoryId = EngineCategory.Id,
-                DealerId = Dealer.Id,
+                DealerId = Dealer.Id
             };
 
             BilsteinEvoT2 = new Product()
@@ -229,7 +254,7 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
                 UserId = GuestUser.Id,
                 ManufacturerId = Bilstein.Id,
                 CategoryId = SuspensionCategory.Id,
-                DealerId = Dealer.Id,
+                DealerId = Dealer.Id
             };
 
             BrakePads = new Product()
@@ -244,7 +269,67 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
                 UserId = DealerUser.Id,
                 ManufacturerId = Brembo.Id,
                 CategoryId = BrakesCategory.Id,
+                DealerId = Dealer.Id
+            };
+
+            BrakeDisc = new Product()
+            {
+                Id = 5,
+                Name = "Car Breake Disc",
+                Description = "A disc brake is a type of brake that uses the calipers to squeeze pairs of pads against a disc or a rotor to create friction.",
+                Price = 89.99m,
+                StockQuantity = 20,
+                ImageUrl = "https://www.brembo.com/en/PublishingImages/auto/primo-equipaggiamento/prodotti/dischi/BREMBO-16-07-13-14803_.jpg",
+                IsDeleted = false,
+                UserId = DealerUser.Id,
+                ManufacturerId = Brembo.Id,
+                CategoryId = BrakesCategory.Id,
                 DealerId = Dealer.Id,
+            };
+
+            TimingBelt = new Product()
+            {
+                Id = 4,
+                Name = "Timing belt",
+                Description = "In a piston engine, either a timing belt (also called a cambelt) or timing chain or set of timing gears is a perishable component used to synchronize the rotation of the crankshaft and the camshaft.",
+                Price = 55.00m,
+                ImageUrl = "https://cdn.autodoc.de/thumb?id=709611&m=0&n=0&lng=en&rev=94077829",
+                IsDeleted = false,
+                StockQuantity = 10,
+                ManufacturerId = Brembo.Id,
+                CategoryId = EngineCategory.Id,
+                UserId = GuestUser.Id,
+                DealerId = Dealer.Id
+            };
+
+            XenarcBulb = new Product()
+            {
+                Id = 6,
+                Name = "Osram Xenarc",
+                Description = "Osram Xenarc 66140 D1S 35W Xenon Headlight HID Bulb",
+                Price = 52.25m,
+                ImageUrl = "https://www.hidconcept.com/cdn/shop/products/HID-OS-D1S-4K-X1-1_1500x.jpg?v=1657917235",
+                IsDeleted = false,
+                StockQuantity = 20,
+                ManufacturerId = Osram.Id,
+                CategoryId = ExteriorCategory.Id,
+                UserId = DealerUser.Id,
+                DealerId = Dealer.Id,
+            };
+
+            WindshieldWipers = new Product()
+            {
+                Id = 7,
+                Name = "Aerotwin Single Blade",
+                Description = "The Bosch Aerotwin are designed to maximize wiping quality, last longer and are decisively less noisy than traditional wiper blades. The Aerotwin range of wiper blades promotes safer driving by providing a consistently clear vision of the road ahead.",
+                Price = 45.12m,
+                ImageUrl = "https://www.wiperblades.co.uk/media/IMG5A9FAA7E88BC3/1000/1-ar-packaging.webp",
+                IsDeleted = false,
+                StockQuantity = 30,
+                ManufacturerId = Bosch.Id,
+                CategoryId = ExteriorCategory.Id,
+                UserId = DealerUser.Id,
+                DealerId = Dealer.Id
             };
         }
 
@@ -271,6 +356,38 @@ namespace AutoPartsWeb.Infrastructure.Data.DataSeed
                 Id = 3,
                 Value = 5,
                 ProductId = BrakePads.Id,
+                UserId = DealerUser.Id
+            };
+
+            Forth = new Rating()
+            {
+                Id = 4,
+                Value = 4,
+                ProductId = TimingBelt.Id,
+                UserId = GuestUser.Id
+            };
+
+            Fifth = new Rating()
+            {
+                Id = 5,
+                Value = 5,
+                ProductId = BrakeDisc.Id,
+                UserId = GuestUser.Id
+            };
+
+            Sixth = new Rating()
+            {
+                Id = 6,
+                Value = 5,
+                ProductId = XenarcBulb.Id,
+                UserId = DealerUser.Id
+            };
+
+            Seventh = new Rating()
+            {
+                Id = 7,
+                Value = 4,
+                ProductId = WindshieldWipers.Id,
                 UserId = DealerUser.Id
             };
         }

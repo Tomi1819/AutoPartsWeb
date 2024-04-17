@@ -24,6 +24,10 @@
                 dataSeeder.First,
                 dataSeeder.Second,
                 dataSeeder.Third,
+                dataSeeder.Forth,
+                dataSeeder.Fifth,
+                dataSeeder.Sixth,
+                dataSeeder.Seventh
             });
         }
     }

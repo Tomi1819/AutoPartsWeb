@@ -18,7 +18,8 @@
             {
                 dataSeeder.EngineCategory,
                 dataSeeder.SuspensionCategory,
-                dataSeeder.BrakesCategory
+                dataSeeder.BrakesCategory,
+                dataSeeder.ExteriorCategory
             });
         }
     }

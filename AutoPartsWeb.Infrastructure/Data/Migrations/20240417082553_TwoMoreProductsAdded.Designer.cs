@@ -4,6 +4,7 @@ using AutoPartsWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoPartsWeb.Data.Migrations
 {
     [DbContext(typeof(AutoPartsWebDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417082553_TwoMoreProductsAdded")]
+    partial class TwoMoreProductsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +103,7 @@ namespace AutoPartsWeb.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c0fb5426-29be-4136-bdac-979448ee6320",
+                            ConcurrencyStamp = "63472bf6-3eb6-4dcc-94c0-4dc00797f917",
                             Email = "admint@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Jacob",
@@ -109,9 +111,9 @@ namespace AutoPartsWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBM/1QBXjp1VaRzF8roR2E3aamEQ+J9wnLOfpglrs7CPcHIhS7MsZGJRrmHNaAObfg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEbO5nFmmDf5lDNAVL753iNgRPDT+gM7qroPuTCW6EgQFzoqqAYwRsUlQohXMXHBWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "de1abf68-0031-4e28-a9b0-1721e0b1580b",
+                            SecurityStamp = "cc08ecf5-fe72-4980-aaef-e1049ebd91c9",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         },
@@ -119,7 +121,7 @@ namespace AutoPartsWeb.Data.Migrations
                         {
                             Id = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "31ea8d21-8bc9-4323-9f6f-a177ae89ea2e",
+                            ConcurrencyStamp = "4acd46b1-82c1-4c80-9bc7-44a9d9c0df66",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Davis",
@@ -127,9 +129,9 @@ namespace AutoPartsWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAENknSstL/HJqH5yoUStyyqZq/AN0TybIol+rWqCghZcZWC4V00pxPVFjfaOU1MdQHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMB1kDE6VLIzXtxLLLrDI3P7VQy2TudGbzhtEMHloP6KvNaHQIE8K6I6HAQFYStzaw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "764219d3-1a67-4c69-b81c-fd19a64ad0fa",
+                            SecurityStamp = "6b32f138-a520-43fd-8e93-5a5bfaf62f01",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -137,7 +139,7 @@ namespace AutoPartsWeb.Data.Migrations
                         {
                             Id = "1a558517-6bd0-4da4-9a6c-e5d92df0a945",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0738f9a-04d4-41a1-95c6-509bde6173f8",
+                            ConcurrencyStamp = "158c9315-d73c-434e-97d9-55757ae5ff48",
                             Email = "dealer@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Jake",
@@ -145,9 +147,9 @@ namespace AutoPartsWeb.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "dealer@mail.com",
                             NormalizedUserName = "dealer@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBtqeHCju81rVUDHt4eWi50kNbKNzn5h4pzBixvxLJIBn+/3hQPYT/7HzGU7iATT2Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1gLanhddNqcpnvVd6+Xp65n4mo2dIOflsCDl0PDIkfW2Ev/mYQyazoDCyNyRQDSg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a9678978-ff21-4cb9-949f-273e97a8cba3",
+                            SecurityStamp = "29fe670b-3bd0-47a6-91e5-40a802463b56",
                             TwoFactorEnabled = false,
                             UserName = "dealer@mail.com"
                         });
@@ -196,12 +198,6 @@ namespace AutoPartsWeb.Data.Migrations
                             Id = 2,
                             IsDeleted = false,
                             Name = "Brakes"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsDeleted = false,
-                            Name = "Exterior"
                         });
                 });
 
@@ -320,13 +316,6 @@ namespace AutoPartsWeb.Data.Migrations
                             Country = "Germany",
                             IsDeleted = false,
                             Name = "Bosch"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Country = "Germany",
-                            IsDeleted = false,
-                            Name = "Osram"
                         });
                 });
 
@@ -540,34 +529,6 @@ namespace AutoPartsWeb.Data.Migrations
                             Price = 89.99m,
                             StockQuantity = 20,
                             UserId = "1a558517-6bd0-4da4-9a6c-e5d92df0a945"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 4,
-                            DealerId = 1,
-                            Description = "Osram Xenarc 66140 D1S 35W Xenon Headlight HID Bulb",
-                            ImageUrl = "https://www.hidconcept.com/cdn/shop/products/HID-OS-D1S-4K-X1-1_1500x.jpg?v=1657917235",
-                            IsDeleted = false,
-                            ManufacturerId = 4,
-                            Name = "Osram Xenarc",
-                            Price = 52.25m,
-                            StockQuantity = 20,
-                            UserId = "1a558517-6bd0-4da4-9a6c-e5d92df0a945"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 4,
-                            DealerId = 1,
-                            Description = "The Bosch Aerotwin are designed to maximize wiping quality, last longer and are decisively less noisy than traditional wiper blades. The Aerotwin range of wiper blades promotes safer driving by providing a consistently clear vision of the road ahead.",
-                            ImageUrl = "https://www.wiperblades.co.uk/media/IMG5A9FAA7E88BC3/1000/1-ar-packaging.webp",
-                            IsDeleted = false,
-                            ManufacturerId = 1,
-                            Name = "Aerotwin Single Blade",
-                            Price = 45.12m,
-                            StockQuantity = 30,
-                            UserId = "1a558517-6bd0-4da4-9a6c-e5d92df0a945"
                         });
                 });
 
@@ -638,20 +599,6 @@ namespace AutoPartsWeb.Data.Migrations
                             ProductId = 5,
                             UserId = "5e84f853-e25f-4a90-8f2b-448ffdeed35e",
                             Value = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ProductId = 6,
-                            UserId = "1a558517-6bd0-4da4-9a6c-e5d92df0a945",
-                            Value = 5
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ProductId = 7,
-                            UserId = "1a558517-6bd0-4da4-9a6c-e5d92df0a945",
-                            Value = 4
                         });
                 });
 

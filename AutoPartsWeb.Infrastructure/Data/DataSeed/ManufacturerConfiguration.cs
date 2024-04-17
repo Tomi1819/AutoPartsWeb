@@ -18,7 +18,8 @@
             {
                 dataSeeder.Brembo,
                 dataSeeder.Bilstein,
-                dataSeeder.Bosch
+                dataSeeder.Bosch,
+                dataSeeder.Osram
             });
         }
     }
