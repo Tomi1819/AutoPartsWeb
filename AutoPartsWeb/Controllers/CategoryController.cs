@@ -19,6 +19,7 @@
         }
 
         [HttpGet]
+        [DealerAuthorization]
         public IActionResult Create()
         {
             return View();
