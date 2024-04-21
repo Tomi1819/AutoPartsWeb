@@ -4,7 +4,6 @@
     using AutoPartsWeb.Core.Models.Category;
     using AutoPartsWeb.Infrastructure.Data.Common;
     using AutoPartsWeb.Infrastructure.Data.Models;
-    using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
 
     public class CategoryService : ICategoryService
@@ -30,6 +29,19 @@
             };
 
             await repository.AddAsync(category);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task RemoveCategoryAsync(int categoryId)
+        {
+            var category = await repository.GetByIdAsync<Category>(categoryId);
+
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(categoryId), "Category not found!");
+            }
+
+            category.IsDeleted = true;
             await repository.SaveChangesAsync();
         }
     }

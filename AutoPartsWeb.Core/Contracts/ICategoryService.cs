@@ -5,5 +5,6 @@
     public interface ICategoryService
     {
         Task AddCategoryAsync(CategoryFormViewModel model);
+        Task RemoveCategoryAsync(int categoryId);
     }
 }
