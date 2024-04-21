@@ -149,6 +149,11 @@
             };
         }
 
+        public async Task<Category?> GetCategoryByIdAsync(int id)
+        {
+            return await repository.GetByIdAsync<Category>(id);
+        }
+
         public async Task<ProductFormViewModel> GetProductByIdAsync(int id)
         {
             var product = await repository

@@ -2,6 +2,7 @@
 {
     using AutoPartsWeb.Core.Models.Home;
     using AutoPartsWeb.Core.Models.Product;
+    using AutoPartsWeb.Infrastructure.Data.Models;
 
     public interface IProductService
     {
@@ -16,5 +17,6 @@
         Task EditProductAsync(ProductFormViewModel model, int productId);
         Task<bool> ProductExistsAsync(int productId);
         Task DeleteProductAsync(int productId);
+        Task<Category?> GetCategoryByIdAsync(int id);
     }
 }
