@@ -18,5 +18,6 @@
         Task<bool> ProductExistsAsync(int productId);
         Task DeleteProductAsync(int productId);
         Task<Category?> GetCategoryByIdAsync(int id);
+        Task<Manufacturer?> GetManufacturerAsync(int id);
     }
 }

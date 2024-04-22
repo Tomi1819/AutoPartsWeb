@@ -112,6 +112,7 @@
                 {
                     Id = m.Id,
                     Name = m.Name,
+                    Country = m.Country
                 })
                 .ToListAsync();
         }
@@ -152,6 +153,11 @@
         public async Task<Category?> GetCategoryByIdAsync(int id)
         {
             return await repository.GetByIdAsync<Category>(id);
+        }
+
+        public async Task<Manufacturer?> GetManufacturerAsync(int id)
+        {
+            return await repository.GetByIdAsync<Manufacturer>(id);
         }
 
         public async Task<ProductFormViewModel> GetProductByIdAsync(int id)
