@@ -34,6 +34,12 @@
             return await DbSet<T>().FindAsync(id);
         }
 
+        public async Task RemoveAsync<T>(T entity) where T : class
+        {
+            context.Set<T>().Remove(entity);
+            await SaveChangesAsync();
+        }
+
         public async Task<int> SaveChangesAsync()
         {
             return await context.SaveChangesAsync();
