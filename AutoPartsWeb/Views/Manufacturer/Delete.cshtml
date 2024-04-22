@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ManufacturerFormViewModel>
+
+<h2>Delete Manufacturer</h2>
+
+<div>
+    <h4>Select a manufacturer to delete:</h4>
+    <hr />
+    <form asp-action="Delete" method="post">
+        <div class="form-group">
+            <select class="form-control" name="id">
+                <option value="">-- Select Manufacturer --</option>
+                @foreach (var manufacturer in Model)
+                {
+                    <option value="@manufacturer.Id">@manufacturer.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    </form>
+</div>

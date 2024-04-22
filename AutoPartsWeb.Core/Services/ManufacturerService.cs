@@ -31,5 +31,18 @@
             await repository.AddAsync(manufacturer);
             await repository.SaveChangesAsync();
         }
+
+        public async Task RemoveManufacturerAsync(int manufacturerId)
+        {
+            var manufacturer = await repository.GetByIdAsync<Manufacturer>(manufacturerId);
+
+            if (manufacturer == null)
+            {
+                throw new ArgumentNullException(nameof(manufacturerId), "Manufacturer not found!");
+            }
+
+            manufacturer.IsDeleted = true;
+            await repository.SaveChangesAsync();
+        }
     }
 }

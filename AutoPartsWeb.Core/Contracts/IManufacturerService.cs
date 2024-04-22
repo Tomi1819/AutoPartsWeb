@@ -5,5 +5,6 @@
     public interface IManufacturerService
     {
         Task AddManufacturerAsync(ManufacturerFormViewModel model);
+        Task RemoveManufacturerAsync(int manufacturerId);
     }
 }
