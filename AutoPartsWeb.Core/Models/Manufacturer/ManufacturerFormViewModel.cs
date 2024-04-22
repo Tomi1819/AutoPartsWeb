@@ -6,6 +6,7 @@
 
     public class ManufacturerFormViewModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(ManufacturerMaxNameLength,
             MinimumLength = ManufacturerMinNameLength,
