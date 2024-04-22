@@ -16,6 +16,7 @@
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IDealerService, DealerService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IManufacturerService, ManufacturerService>();
             return services;
         }
 
